@@ -1,10 +1,15 @@
+import { VitePWA } from "vite-plugin-pwa";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import { createHtmlPlugin } from "vite-plugin-html";
+import { visualizer } from "rollup-plugin-visualizer";
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import type { ConfigEnv, UserConfigExport } from "vite";
-
 import path from "path";
 import vue from "@vitejs/plugin-vue";
+import autoprefixer from 'autoprefixer';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import viteCompression from 'vite-plugin-compression';
 import tailwindcss from  'tailwindcss'
 
 
@@ -16,16 +21,22 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       port: 5173,
       proxy: {
         '/api': {
+          // target: 'https://yft.design',
+          // target: 'http://120.77.139.244:8789',
           target: 'http://127.0.0.1:8789',
           changeOrigin: true,
           rewrite: (path) => path.replace(new RegExp('^'), ''),
         },
         '/static': {
-          // target: 'http://127.0.0.1:8789',
+          // target: 'https://yft.design',
+          // target: 'http://120.77.139.244:8789',
+          target: 'http://127.0.0.1:8789',
           changeOrigin: true,
           rewrite: (path) => path.replace(new RegExp('^'), ''),
         },
         '/yft-static': {
+          target: 'https://yft.design',
+          // target: 'http://120.77.139.244:8789',
           // target: 'http://127.0.0.1:8789',
           changeOrigin: true,
           rewrite: (path) => path.replace(new RegExp('^'), ''),
@@ -35,7 +46,14 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     plugins: [                                                                                                                                                                                                                            
       vue(),
 
-
+      visualizer({ open: true }),
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 10240,
+        algorithm: 'gzip',
+        ext: '.gz',
+      }),
       AutoImport({
         imports: ['vue'],
         dts: './src/types/auto-imports.d.ts',
@@ -47,28 +65,118 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-
+      VitePWA({
+        registerType: "autoUpdate",
+        workbox: {
+          cacheId: "yft-design-cache",
+          runtimeCaching: [
+            {
+              urlPattern: /.*/i,
+              handler: "NetworkFirst", // 接口网络优先
+              options: {
+                cacheName: "interface-cache",
+              },
+            },
+            {
+              urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
+              handler: "CacheFirst",
+              options: {
+                cacheName: "js-css-cache",
+              },
+            },
+            {
+              urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+              handler: "CacheFirst",
+              options: {
+                cacheName: "image-cache",
+              },
+            },
+          ],
+        },
+        manifest: {
+          name: "yft-design",
+          short_name: "yft-design",
+          theme_color: "#d14424",
+          icons: [
+            {
+              src: "./favicon.ico",
+              sizes: "192x192",
+              type: "image/png",
+            },
+            {
+              src: "./favicon.ico",
+              sizes: "512x512",
+              type: "image/png",
+            },
+            {
+              src: "./favicon.ico",
+              sizes: "192x192",
+              type: "image/png",
+              purpose: "maskable",
+            },
+            {
+              src: "./favicon.ico",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "maskable",
+            },
+          ],
+          start_url: "./index.html",
+          display: "standalone",
+          background_color: "#000000",
+        },
+      }),
+      createSvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), "src/icons/svg")], // icon存放的目录
+        symbolId: "icon-[name]", // symbol的id
+        inject: "body-last", // 插入的位置
+        customDomId: "__svg__icons__dom__", // svg的id
+      }),
+      createHtmlPlugin({
+        minify: true,
+        inject: {
+          data: {
+            title: 'yft-design'
+          }
+        }
+      })
     ],
     css: {
       postcss: {
         plugins: [
           tailwindcss,
+          autoprefixer({
+            // 自动添加前缀
+            overrideBrowserslist: [
+                'Android 4.1',
+                'iOS 7.1',
+                'Chrome > 31',
+                'ff > 31',
+                'ie >= 8',
+                '> 1%',
+                'last 2 versions',
+                'not dead',
+                'not ie 11',
+                //'last 2 versions', // 所有主流浏览器最近2个版本
+            ],
+            grid: true,
+          }),
         ]
       },
-      // preprocessorOptions: {
-      //   scss: {
-      //     additionalData: `@import "src/assets/style/variable.scss";@import "src/assets/style/mixin.scss";`,
-      //   },
-      //   less: {
-      //     modifyVars: {
-      //       "primary-color": "#d14424",
-      //       "text-color": "#41464b",
-      //       "font-size-base": "13px",
-      //       "border-radius-base": "2px",
-      //     },
-      //     javascriptEnabled: true,
-      //   },
-      // },
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "src/assets/style/variable.scss";@import "src/assets/style/mixin.scss";`,
+        },
+        less: {
+          modifyVars: {
+            "primary-color": "#d14424",
+            "text-color": "#41464b",
+            "font-size-base": "13px",
+            "border-radius-base": "2px",
+          },
+          javascriptEnabled: true,
+        },
+      },
     },
     resolve: {
       alias: {
@@ -98,9 +206,15 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           // assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件像 字体，图片等
           manualChunks: {
             vue: ['vue'],
+            fabric: ['fabric'],
             'lodash-es': ['lodash-es'],
+            'opentype.js': ['opentype.js'],
+            'clipper-lib': ['clipper-lib'],
             'element-plus': ['element-plus'],
           },
+          // manualChunks(id, any): string {
+          //   return id
+          // }
         }
       }
     },

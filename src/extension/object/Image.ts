@@ -1,5 +1,13 @@
-
-
+import { ClipPathType } from '@/configs/images'
+import { strokeImage } from '@/extension/effects/image.stroke'
+import { getMaskCanvas } from '@/extension/effects/image.mask'
+import { addCropImageInteractions, isolateObjectForEdit } from '@/extension/mixins/cropping.mixin'
+import { 
+  croppingControlSet, 
+  flipXCropControls, 
+  flipXYCropControls, 
+  flipYCropControls 
+} from '@/extension/controls/cropping/cropping.controls'
 import { 
   Image as OriginImage, 
   Point, 
@@ -13,6 +21,7 @@ import {
   ImageSource, 
   TOptions 
 } from 'fabric'
+import { EffectItem } from '@/types/common'
 import type { Abortable } from 'fabric'
 import { parseAttributes } from '../parser/parseAttributes'
 
@@ -307,6 +316,7 @@ const imageDefaultValues: Partial<TClassProperties<Image>> = {
 Object.assign(Image.prototype, {
   cacheProperties: [...FabricObject.cacheProperties, 'cropX', 'cropY'],
   ...imageDefaultValues,
+  ...addCropImageInteractions()
 })
 
 classRegistry.setClass(Image)

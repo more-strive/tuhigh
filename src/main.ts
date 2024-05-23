@@ -1,12 +1,36 @@
-import { createApp } from 'vue'
+import { createApp } from "vue"
+import { createPinia } from "pinia"
+import App from "./App.vue"
+import router from './router'; 
+import { setupI18n } from '@/plugins/i18n'
 
-import ElementPlus from 'element-plus'
-import './style.css'
+import "@/extension/index"
 import 'element-plus/dist/index.css'
-import App from './App.vue'
+import "@icon-park/vue-next/styles/index.css"
+import "@/assets/style/global.scss"
+import "@/assets/style/font.scss"
+import "@/assets/style/element-plus.scss"
+import "@/assets/style/tailwindcss.scss"
 
-const app = createApp(App)
+import SvgIcon from "@/icons"
+import Icon from "@/plugins/icon"
+import Component from "@/plugins/component"
+import Directive from "@/plugins/directive"
 
-app.use(ElementPlus)
-app.mount('#app')
-createApp(App).mount('#app')
+import "virtual:svg-icons-register"
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+useRegisterSW()
+
+async function start() {
+    const app = createApp(App);
+    await setupI18n(app)
+    app.use(router);
+    app.use(createPinia());
+    app.use(Icon);
+    app.use(SvgIcon);
+    app.use(Component);
+    app.use(Directive);
+    app.mount("#app");
+}
+
+start()
