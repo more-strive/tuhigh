@@ -9,7 +9,7 @@ import { TextboxElement, CanvasElement, GroupElement } from "@/types/canvas"
 import { clipperPath } from '@/utils/clipper'
 import { useActiveElement } from '@vueuse/core'
 import { computed } from 'vue'
-import useCanvas from "@/views/Canvas/useCanvas"
+import useCanvas from "@/logic/Canvas/useCanvas"
 import useCanvasZindex from "./useCanvasZindex"
 import { copyText } from '@/utils/clipboard'
 

@@ -20,7 +20,7 @@ import { ref, watch, computed, onMounted, onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
 import { ElementNames } from "@/types/elements";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 const { canvasObject } = storeToRefs(useMainStore());
 
 const handleElement = computed(() => canvasObject.value);

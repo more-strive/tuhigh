@@ -40,7 +40,7 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import useCanvas from "@/views/Canvas/useCanvas"
+import useCanvas from "@/logic/Canvas/useCanvas"
 import useHandleElement  from '@/hooks/useHandleElement'
 import ExportFile from './components/index.vue'
 import useI18n from '@/hooks/useI18n'

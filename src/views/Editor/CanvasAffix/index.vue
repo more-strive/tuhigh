@@ -28,7 +28,7 @@ import { storeToRefs } from 'pinia'
 import { CanvasElement } from '@/types/canvas'
 import { WorkSpaceClipType, WorkSpaceSafeType } from '@/configs/canvas'
 import { useFabricStore, useKeyboardStore, useMainStore } from '@/store'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 import useI18n from '@/hooks/useI18n'
 
 

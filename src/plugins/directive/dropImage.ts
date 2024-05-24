@@ -1,5 +1,5 @@
 import { DirectiveBinding, ObjectDirective } from "vue";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import { getImageDataURL, getImageText } from "@/utils/image";
 import useHandleTemplate from "@/hooks/useHandleTemplate";
 import useHandleCreate from "@/hooks/useHandleCreate";

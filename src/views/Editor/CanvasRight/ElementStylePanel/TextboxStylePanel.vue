@@ -240,7 +240,7 @@ import ElementPatterns from '../Components/ElementPatterns.vue'
 import ElementEffects from '../Components/ElementEffects.vue'
 import ElementFill from '../Backgrounds/ElementFill.vue'
 import useHandleCreate from "@/hooks/useHandleCreate"
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 
 
 

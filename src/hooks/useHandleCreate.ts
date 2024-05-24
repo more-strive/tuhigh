@@ -17,8 +17,8 @@ import { VerticalText } from '@/extension/object/VerticalText'
 import { Table } from "@/extension/object/Table"
 import JsBarcode from "jsbarcode";
 import { i18nObj } from "@/plugins/i18n/index"
-import useCenter from "@/views/Canvas/useCenter";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCenter from "@/logic/Canvas/useCenter";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useCanvasZindex from "./useCanvasZindex";
 
 

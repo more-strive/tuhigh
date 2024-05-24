@@ -62,7 +62,7 @@ import {
 } from 'beautify-qrcode'
 import { Base64 } from 'js-base64'
 import { QRCodeElement, QRCodeType } from '@/types/canvas'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 import ElementPosition from '../Components/ElementPosition.vue'
 import ElementOutline from '../Components/ElementOutline.vue'
 import ElementShadow from '../Components/ElementShadow.vue'

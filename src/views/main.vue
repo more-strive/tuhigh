@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, watch, ref } from 'vue'
-import { Leafer } from 'leafer-ui'
+import { Leafer, Path } from 'leafer-ui'
 import { loadSVGFromString } from '@/extension/parser/loadSVGFromString'
 const canvasRef = ref<HtmlCanvasElement | null>()
 const leaferCanvas = ref()
@@ -21,6 +21,24 @@ const getSvgContent = (event) => {
     // console.log('fileContent:', fileContent)
     const content = await loadSVGFromString(fileContent)
     console.log('content:', content)
+    content.objects.forEach(ele => {
+      if (ele.type.toLowerCase() === 'path') {
+        let d = ''
+        for (let i = 0; i < ele.path.length; i++ ) {
+          d += ele.path[i].join(' ')
+        }
+        const path = new Path({ 
+          x: ele.left,
+          y: ele.top,
+          scaleX: ele.flipX ? -ele.scaleX : ele.scaleX,
+          scaleY: ele.flipY ? -ele.scaleY : ele.scaleY,
+          path: d,
+          fill: ele.fill
+        })
+        leaferCanvas.value.add(path)
+      }
+      
+    })
   }
   reader.readAsText(file)
 }

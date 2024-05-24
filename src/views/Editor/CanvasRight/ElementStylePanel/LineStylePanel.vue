@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import { useMainStore, useTemplatesStore } from '@/store'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 import { Polyline } from '@/extension/object/Polyline'
 import { LineElement } from '@/types/canvas'
 import { storeToRefs } from 'pinia'

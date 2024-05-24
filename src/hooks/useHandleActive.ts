@@ -10,7 +10,7 @@ import { storeToRefs } from 'pinia'
 import { px2mm, mm2px } from '@/utils/image'
 import type { WritableComputedRef } from 'vue'
 import NP from 'number-precision'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 
 
 

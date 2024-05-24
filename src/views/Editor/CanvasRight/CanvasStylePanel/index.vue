@@ -196,7 +196,7 @@ import {
   MinSize,
   MaxSize,
 } from "@/configs/background";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import Backgrounds from "../Backgrounds/index.vue";
 import Watermark from "./Watermark/index.vue";
 import useHistorySnapshot from "@/hooks/useHistorySnapshot";

@@ -45,7 +45,7 @@ import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
 import { TextboxElement } from '@/types/canvas'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 
 const props = defineProps({
   hasStroke: {

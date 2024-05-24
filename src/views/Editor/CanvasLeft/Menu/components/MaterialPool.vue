@@ -48,7 +48,7 @@ import { Object as FabricObject} from "fabric";
 import { loadSVGFromString } from '@/extension/parser/loadSVGFromString'
 import { getImageDataURL, getImageText } from "@/utils/image";
 import { useTemplatesStore } from "@/store";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import PathPool from "./MaterialComponents/PathPool.vue";
 import LinePool from "./MaterialComponents/LinePool.vue";
 import useHandleCreate from "@/hooks/useHandleCreate";

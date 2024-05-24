@@ -3,8 +3,8 @@ import { storeToRefs } from 'pinia'
 import { useFabricStore, useTemplatesStore } from '@/store'
 import { useElementBounding } from '@vueuse/core'
 import { Group, Point } from 'fabric'
-import useCanvas from '@/views/Canvas/useCanvas'
-import useCenter from '@/views/Canvas/useCenter'
+import useCanvas from '@/logic/Canvas/useCanvas'
+import useCenter from '@/logic/Canvas/useCenter'
 import { WorkSpaceThumbType } from '@/configs/canvas'
 
 export default () => {

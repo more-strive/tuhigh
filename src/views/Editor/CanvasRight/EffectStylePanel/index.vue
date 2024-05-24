@@ -147,7 +147,7 @@ import { ElementNames, RightStates, SupportEffects } from '@/types/elements'
 
 import { useFabricStore, useMainStore, useTemplatesStore } from "@/store";
 import useI18n from "@/hooks/useI18n";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import Backgrounds from "../Backgrounds/index.vue";
 import useHistorySnapshot from "@/hooks/useHistorySnapshot";
 import useCanvasScale from '@/hooks/useCanvasScale'

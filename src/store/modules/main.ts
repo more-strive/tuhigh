@@ -7,7 +7,7 @@ import { getSupportFonts } from '@/utils/fonts'
 import { CanvasElement } from '@/types/canvas'
 import { RightStates, PointElement, ImageCategoryData } from '@/types/elements'
 import { ExportTypes, PoolType, SystemFont } from '@/types/common'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 
 export interface MainState {
   canvasObject: FabricObject | undefined

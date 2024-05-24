@@ -3,7 +3,7 @@ import { useMainStore, useTemplatesStore, useKeyboardStore } from "@/store";
 import { KEYS } from "@/configs/hotkey";
 import useHandleCreate from "@/hooks/useHandleCreate";
 import useCanvasScale from "@/hooks/useCanvasScale";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import { Textbox } from "fabric";
 import { loadSVGFromString } from '@/extension/parser/loadSVGFromString'
 import { getImageDataURL, getImageText } from "@/utils/image";

@@ -71,7 +71,7 @@ import { storeToRefs } from "pinia";
 import { Object as FabricObject, Group } from "fabric";
 import { useFabricStore, useMainStore, useSnapshotStore, useTemplatesStore } from "@/store";
 import useI18n from "@/hooks/useI18n";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useHandleTool from "@/hooks/useHandleTool";
 import useCanvasScale from "@/hooks/useCanvasScale";
 import useHandleElement from "@/hooks/useHandleElement";

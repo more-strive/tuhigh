@@ -51,7 +51,7 @@ import { useTemplatesStore } from '@/store'
 import useCanvasScale from '@/hooks/useCanvasScale'
 import useHandleCreate from '@/hooks/useHandleCreate'
 import useHandleTemplate from '@/hooks/useHandleTemplate'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 import useI18n from "@/hooks/useI18n";
 import tinycolor from 'tinycolor2'
 import { downloadLinkFile } from "@/utils/download";

@@ -32,8 +32,8 @@ import { nanoid } from 'nanoid'
 import useCanvasScale from '@/hooks/useCanvasScale'
 import useHandleCreate from '@/hooks/useHandleCreate'
 import useHandleTemplate from '@/hooks/useHandleTemplate'
-import useCanvas from '@/views/Canvas/useCanvas'
-import usePixi from '@/views/Canvas/usePixi';
+import useCanvas from '@/logic/Canvas/useCanvas'
+import usePixi from '@/logic/Canvas/usePixi';
 
 
 const templatesStore = useTemplatesStore()

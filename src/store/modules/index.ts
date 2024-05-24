@@ -1,4 +1,5 @@
 export * from './fabric'
+export * from './leafer'
 export * from './main'
 export * from './template'
 export * from './snapshot'

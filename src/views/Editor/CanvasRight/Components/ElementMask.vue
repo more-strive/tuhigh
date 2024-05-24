@@ -71,7 +71,7 @@ import { useMainStore } from "@/store";
 import { ImageElement } from "@/types/canvas";
 import { ElementNames } from "@/types/elements";
 import { filters, Image } from "fabric";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 
 const BlendColorFilter = "BlendColor";
 const maskColor = ref("");

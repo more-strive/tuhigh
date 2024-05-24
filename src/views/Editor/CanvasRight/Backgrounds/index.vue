@@ -527,7 +527,7 @@ import { getRandomNum } from "@/utils/common";
 import { getImageDataURL } from "@/utils/image";
 import { getColorShading } from "@/api/color";
 import trianglify from "@/plugins/trianglify/trianglify";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import GridFill from "./GridFill.vue";
 import GradientFill from "./GradientFill.vue";
 import useHandleBackground from "@/hooks/useHandleBackground";

@@ -19,7 +19,7 @@ import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
 import { Image } from "fabric";
 import { BlendModes } from '@/configs/images';
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 
 
 const { canvasObject } = storeToRefs(useMainStore());

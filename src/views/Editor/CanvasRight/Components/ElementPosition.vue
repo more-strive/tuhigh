@@ -207,7 +207,7 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { AlignCommand, LayerCommand } from "@/types/elements";
 import { useMainStore, useTemplatesStore } from "@/store";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useHandleTool from "@/hooks/useHandleTool";
 import useHandleActive from "@/hooks/useHandleActive";
 

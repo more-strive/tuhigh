@@ -47,9 +47,9 @@ import { storeToRefs } from "pinia";
 import { util } from "fabric";
 import { GifImage } from '@/extension/object/GifImage'
 import useHandleCreate from "@/hooks/useHandleCreate";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import { Image } from "fabric";
-import useCenter from "@/views/Canvas/useCenter";
+import useCenter from "@/logic/Canvas/useCenter";
 const mainStore = useMainStore();
 const { illustrationCategoryType, illustrationCategoryData } = storeToRefs(mainStore);
 const { createImageElement } = useHandleCreate();

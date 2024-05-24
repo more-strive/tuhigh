@@ -12,21 +12,19 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { onMounted, onUnmounted } from 'vue'
-import { useFabricStore, useMainStore } from '@/store'
+import { useLeaferStore, useMainStore } from '@/store'
 
 import { contextMenus } from '@/configs/contextMenu'
-import { initEditor } from '@/views/Canvas/useCanvas'
-import { initPixi } from '@/views/Canvas/usePixi'
+import { initEditor } from '@/logic/Canvas/useCanvas'
 import useCanvasHotkey from '@/hooks/useCanvasHotkey'
-const fabricStore = useFabricStore()
+const leaferStore = useLeaferStore()
 const mainStore = useMainStore()
-const { wrapperRef, canvasRef } = storeToRefs(fabricStore)
+const { wrapperRef, canvasRef } = storeToRefs(leaferStore)
 const { drawAreaFocus } = storeToRefs(mainStore)
 const { keydownListener, keyupListener, pasteListener } = useCanvasHotkey()
 
 onMounted(() => {
   initEditor()
-  initPixi()
   document.addEventListener('keydown', keydownListener)
   document.addEventListener('keyup', keyupListener)
   window.addEventListener('blur', keyupListener)
@@ -51,10 +49,6 @@ const remDrawAreaFocus = () => {
 </script>
 
 <style lang="scss" scoped>
-.full-size {
-  height: 100%;
-  width: 100%;
-}
 .background-grid {
   --offsetX: 0px;
   --offsetY: 0px;
@@ -66,4 +60,4 @@ const remDrawAreaFocus = () => {
   background-position: var(--offsetX) var(--offsetY), calc(var(--size) + var(--offsetX)) calc(var(--size) + var(--offsetY));
   background-size: calc(var(--size) * 2) calc(var(--size) * 2);
 }
-</style>@/views/Canvas/usePixi
+</style>@/logic/Canvas/usePixi

@@ -83,7 +83,7 @@ import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
 import * as fabric from "fabric";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import { CanvasElement } from "@/types/canvas";
 
 const props = defineProps({

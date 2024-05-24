@@ -1,6 +1,6 @@
 import { CanvasElement, TextboxElement } from '@/types/canvas'
 import { ElementNames } from '@/types/elements'
-import useCommon from '@/views/Canvas/useCommon'
+import useCommon from '@/logic/Canvas/useCommon'
 import { defineStore } from 'pinia'
 import { useMainStore } from './main'
 

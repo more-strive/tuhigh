@@ -129,7 +129,7 @@ import { Image } from "fabric";
 import useCanvasScale from "@/hooks/useCanvasScale";
 import useHandleCreate from "@/hooks/useHandleCreate";
 import useHandleTemplate from "@/hooks/useHandleTemplate";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useI18n from "@/hooks/useI18n";
 
 

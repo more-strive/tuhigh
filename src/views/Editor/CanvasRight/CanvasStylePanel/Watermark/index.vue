@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts" setup>
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useI18n from "@/hooks/useI18n";
 import { ref, reactive } from 'vue'
 import { debounce } from 'lodash-es';

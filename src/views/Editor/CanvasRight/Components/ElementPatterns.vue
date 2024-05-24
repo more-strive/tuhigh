@@ -32,7 +32,7 @@ import { useMainStore } from '@/store'
 import { util, Pattern } from 'fabric'
 import { TextboxElement, TPatternRepeat } from '@/types/canvas'
 import { PatternImages } from '@/configs/images'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 
 const props = defineProps({
   hasPatterns: {

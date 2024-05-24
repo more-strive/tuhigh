@@ -326,7 +326,7 @@ import { filters, Image } from "fabric";
 import { ImageElement } from "@/types/canvas";
 import { ElementNames } from "@/types/elements";
 import { SharpenMatrix, EmbossMatrix, GrayscaleType } from "@/configs/images";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import useI18n from "@/hooks/useI18n";
 
 const [canvas] = useCanvas();

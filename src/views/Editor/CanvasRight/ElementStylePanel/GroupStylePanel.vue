@@ -140,7 +140,7 @@ import { ElementNames, FontGroupOption } from '@/types/elements'
 import { CanvasElement, GroupElement, ImageElement, PathElement, TextboxElement } from '@/types/canvas'
 import ElementPosition from '../Components/ElementPosition.vue'
 import ElementEffects from '../Components/ElementEffects.vue'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 // 组合元素编辑
 // http://jsfiddle.net/crandellws/1cad3e4o/
 const [ canvas ] = useCanvas()

@@ -105,7 +105,7 @@ import ElementFilter from "../Components/ElementFilter.vue";
 import ElementMask from "../Components/ElementMask.vue";
 import ElementBlend from "../Components/ElementBlend.vue";
 import ElementEffects from "../Components/ElementEffects.vue";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 
 const mainStore = useMainStore();
 const templatesStore = useTemplatesStore();

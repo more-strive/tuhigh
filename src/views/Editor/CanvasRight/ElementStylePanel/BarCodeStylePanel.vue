@@ -90,7 +90,7 @@ import { BarCodeStyleLibs } from "@/configs/codeStyles";
 import { Base64 } from "js-base64";
 import { BarCodeElement } from "@/types/canvas";
 import JsBarCode from "jsbarcode";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 import ElementPosition from "../Components/ElementPosition.vue";
 import ElementOutline from "../Components/ElementOutline.vue";
 import ElementShadow from "../Components/ElementShadow.vue";

@@ -141,7 +141,7 @@ import useHandleCreate from '@/hooks/useHandleCreate'
 import useHandleTemplate from '@/hooks/useHandleTemplate'
 import JsBarCode from "jsbarcode";
 import useI18n from "@/hooks/useI18n";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 
 const { t } = useI18n();
 const { addTemplate } = useHandleTemplate()

@@ -14,7 +14,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 const { canvasObject } = storeToRefs(useMainStore())
 
 const opacity = ref<number>(canvasObject.value ? canvasObject.value.opacity : 1)

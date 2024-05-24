@@ -44,7 +44,7 @@ import { useMainStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { Path } from 'fabric'
 import { PathElement } from '@/types/canvas'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 const mainStore = useMainStore()
 const { canvasObject } = storeToRefs(mainStore)
 

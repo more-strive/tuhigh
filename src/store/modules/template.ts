@@ -7,10 +7,10 @@ import { useMainStore } from './main'
 import { ElementNames } from '@/types/elements'
 import { ElLoading } from 'element-plus'
 import useCanvasScale from '@/hooks/useCanvasScale'
-import useCanvas from '@/views/Canvas/useCanvas'
+import useCanvas from '@/logic/Canvas/useCanvas'
 import useHistorySnapshot from '@/hooks/useHistorySnapshot'
-import useCommon from '@/views/Canvas/useCommon'
-import usePixi from '@/views/Canvas/usePixi'
+import useCommon from '@/logic/Canvas/useCommon'
+import usePixi from '@/logic/Canvas/usePixi'
 
 
 interface UpdateElementData {

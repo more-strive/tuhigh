@@ -49,7 +49,7 @@ import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
 import { CanvasElement } from "@/types/canvas";
-import useCanvas from "@/views/Canvas/useCanvas";
+import useCanvas from "@/logic/Canvas/useCanvas";
 
 const [canvas] = useCanvas();
 const { canvasObject } = storeToRefs(useMainStore());

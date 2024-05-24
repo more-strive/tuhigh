@@ -1,5 +1,5 @@
-import useCanvas from "@/views/Canvas/useCanvas"
-import useCenter from "@/views/Canvas/useCenter"
+import useCanvas from "@/logic/Canvas/useCanvas"
+import useCenter from "@/logic/Canvas/useCenter"
 import useCanvasZindex from "./useCanvasZindex"
 import { AlignCommand, ElementNames, LayerCommand } from "@/types/elements"
 import { useTemplatesStore } from "@/store"
