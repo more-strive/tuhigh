@@ -1,12 +1,13 @@
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect } from 'leafer-ui'
+import { Leafer, App, Rect, Frame } from 'leafer-ui'
 import { useElementBounding } from '@vueuse/core'
 import { isMobile } from '@/utils/common'
 import { FabricCanvas } from '@/app/fabricCanvas'
 import { useTemplatesStore, useLeaferStore } from '@/store'
 import useCommon from './useCommon'
 import useHammer from './useHammer'
+import '@leafer-in/editor'
 
 
 
@@ -22,39 +23,21 @@ const initConf = () => {
 const setCanvasTransform = () => {
   if (!app) return
   const leaferStore = useLeaferStore()
-  const { zoom, wrapperRef, scalePercentage } = storeToRefs(leaferStore)
+  const { wrapperRef } = storeToRefs(leaferStore)
   const { width, height } = useElementBounding(wrapperRef.value)
-  // canvas.set({width: width.value, height: height.value})
-  // canvas.width = width.value
-  // canvas.height = height.value
-  // const objects = canvas.getObjects().filter(ele => !WorkSpaceThumbType.includes(ele.id))
-  // const boundingBox = Group.prototype.getObjectsBoundingBox(objects)
-  // if (!boundingBox) return
-  // let boxWidth = boundingBox.width, boxHeight = boundingBox.height
-  // let centerX = boundingBox.centerX, centerY = boundingBox.centerY
-  // const workSpaceDraw = canvas.getObjects().filter(item => item.id === WorkSpaceDrawType)[0]
-  // if (workSpaceDraw) {
-  //   boxWidth = workSpaceDraw.width
-  //   boxHeight = workSpaceDraw.height
-  //   centerX = workSpaceDraw.left + workSpaceDraw.width / 2
-  //   centerY = workSpaceDraw.top + workSpaceDraw.height / 2 
-  // }
-  // zoom.value = Math.min(canvas.getWidth() / boxWidth, canvas.getHeight() / boxHeight) * scalePercentage.value / 100
-  // canvas.setZoom(zoom.value)
-  // canvas.absolutePan(new Point(centerX, centerY).scalarMultiply(zoom.value).subtract(canvas.getCenterPoint()))
+  const background = app.ground.findOne('#background')
+  const workspace = app.tree.findOne('#workspace')
+  background.set({width: width.value, height: height.value})
+  if (!workspace.width) return
+  if (!workspace.height) return
+  workspace.set({x: width.value / 2 - workspace.width / 2, y: height.value / 2 - workspace.height / 2})
+  console.log(background)
 }
 
 const initCanvas = () => {
   const leaferStore = useLeaferStore()
   const { canvasRef } = storeToRefs(leaferStore)
-  const leaferWidth = leaferStore.getWidth()
-  const leaferHeight = leaferStore.getHeight()
   if (!canvasRef.value) return
-  // canvas = new Leafer({
-  //   view: canvasRef.value, 
-  //   width: leaferWidth,
-  //   height: leaferHeight
-  // })
   app = new App({ 
     view: canvasRef.value,
     ground: { type: 'draw' },
@@ -62,8 +45,8 @@ const initCanvas = () => {
     sky: { type: 'draw' }
 })
 
-  const background = new Rect({ width: 800, height: 600, fill: 'gray' })
-  const rect = new Rect({ x: 100, y: 100, fill: '#32cd79', draggable: true })
+  const background = new Rect({ id: 'background', width: 800, height: 600, fill: '' })
+  const rect = new Frame({ id: 'workspace', x: 100, y: 100, width: 800, height: 600, fill: 'pink', draggable: false })
   const border = new Rect({ x: 200, y: 200, stroke: 'blue', draggable: true })
 
   app.ground.add(background)
