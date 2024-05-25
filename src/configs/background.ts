@@ -1,3 +1,10 @@
+/*
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-05-25 20:03:23
+ * @LastEditors: June
+ * @LastEditTime: 2024-05-25 22:33:25
+ */
 export const TransparentFill = 'rgba(0,0,0,0)'
 export const MinSize = 30
 export const MaxSize = 800
@@ -15,9 +22,9 @@ export const DesignSizeMode = [
 ]
 
 export const BackgroundFillMode = [
-  {id: 0, name: '纯色填充'}, 
-  {id: 1, name: '图片填充'}, 
-  {id: 2, name: '渐变填充'},
+  {id: 0, type: 'solid', name: '纯色填充'}, // 纯色填充
+  {id: 1, type: 'image',  name: '图片填充'}, // 图片填充
+  {id: 2, type: 'linear', name: '渐变填充'}, // 线性渐变
   {id: 3, name: '网格填充'},
   {id: 4, name: '形状填充'},
   {id: 5, name: '智能填充'},

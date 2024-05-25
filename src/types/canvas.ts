@@ -42,7 +42,10 @@ export interface Template {
 }
 
 export interface WorkSpaceElement {
-  fill?: string | Gradient<'linear' | 'radial'> | Pattern
+  fill: {
+    type: string,
+    color: string
+  }
   left: number
   top: number
   fillType: number

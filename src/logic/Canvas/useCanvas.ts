@@ -1,3 +1,10 @@
+/*
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-05-25 20:03:23
+ * @LastEditors: June
+ * @LastEditTime: 2024-05-25 23:20:28
+ */
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Leafer, App, Rect, Frame } from 'leafer-ui'
@@ -8,7 +15,7 @@ import { useTemplatesStore, useLeaferStore } from '@/store'
 import useCommon from './useCommon'
 import useHammer from './useHammer'
 import '@leafer-in/editor'
-
+import { CanvasTypes } from '@/enums'
 
 
 
@@ -44,7 +51,7 @@ const initCanvas = () => {
 })
 
   // const background = new Rect({ id: 'background', width: 800, height: 600, fill: '' })
-  const rect = new Frame({ id: 'workspace', x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
+  const rect = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
   // const border = new Rect({ x: 200, y: 200, stroke: 'blue', draggable: true })
 
   // app.ground.add(background)

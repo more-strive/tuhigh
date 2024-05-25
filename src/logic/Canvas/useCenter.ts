@@ -1,12 +1,20 @@
+/*
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-05-25 20:03:23
+ * @LastEditors: June
+ * @LastEditTime: 2024-05-25 23:20:38
+ */
 import useCanvas from "./useCanvas"
 import { LeafList  } from 'leafer-ui'
 import { WorkSpaceDrawType, WorkSpaceThumbType } from "@/configs/canvas"
 import { CanvasElement } from "@/types/canvas"
 import { Group, Point } from "fabric"
+import { CanvasTypes } from '@/enums'
 
 export default () => {
   const [ canvas ] = useCanvas()
-  const workspace = canvas.tree.find('#workspace')[0]
+  const workspace = canvas.tree.find(`#${CanvasTypes.WorkSpaceDrawType}`)[0]
 
   // const workSpaceDraw = canvas.getObjects().filter(item => (item as CanvasElement).id === WorkSpaceDrawType)[0] as CanvasElement
   // const objects = canvas.getObjects().filter(ele => !WorkSpaceThumbType.includes(ele.id))

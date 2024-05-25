@@ -500,7 +500,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, onMounted } from "vue";
 import { useMainStore, useTemplatesStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { debounce } from "lodash-es";
@@ -531,7 +530,7 @@ import useCanvas from "@/logic/Canvas/useCanvas";
 import GridFill from "./GridFill.vue";
 import GradientFill from "./GradientFill.vue";
 import useHandleBackground from "@/hooks/useHandleBackground";
-
+import { CanvasTypes } from '@/enums'
 const templatesStore = useTemplatesStore();
 const { setBackgroudImage } = useHandleBackground();
 const { currentTemplate } = storeToRefs(templatesStore);
@@ -589,21 +588,31 @@ const background = computed(() => {
 // 设置背景图片隐藏
 const removeBackgroundElement = () => {
   const [canvas] = useCanvas();
-  canvas.set("backgroundImage", null);
-  canvas.renderAll();
+  console.log(canvas)
+  console.log('sfjaskdjfkasdjf')
+  // canvas.set("backgroundImage", null);
+  // canvas.renderAll();
 };
 
-// 设置背景模式：纯色，图片，渐变，网格，形状，智能
+// 设置背景模式：纯色，图片，渐变，网格，形状，智能 type 为id  也是下标
 const changeBackgroundType = (type: number) => {
+  const item = BackgroundFillMode[type]
+  console.log(item)
   // 纯色
   if (type === 0) {
-    const templateBackground: WorkSpaceElement = {
-      ...background.value,
-      fillType: type,
-      fill: background.value.color || "#fff",
-    };
+    // const templateBackground: WorkSpaceElement = {
+    //   ...background.value,
+    //   fillType: type,
+    //   fill: background.value.color || "#fff",
+    // };
+
     removeBackgroundElement();
-    updateBackground(templateBackground);
+    updateBackground({
+      fill: {
+        type: item.type,
+        color: unref(background).color || '#fff'
+      }
+    });
   }
   // 图片
   else if (type === 1) {
@@ -661,14 +670,9 @@ const changeBackgroundType = (type: number) => {
 // 设置背景
 const updateBackground = (props: Partial<WorkSpaceElement>) => {
   const [canvas] = useCanvas();
-  const workspace = canvas.tree.findOne('#workspace')
-  console.log(props)
-  props.color &&  (workspace.fill = props.color)
-
-  // const workSpaceDraw = canvas
-  //   .getObjects()
-  //   .filter((item) => item.id === WorkSpaceDrawType)[0];
-  // if (!workSpaceDraw) return;
+  const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+  if(!workspace) return
+//  更新缩略图 未处理
   // templatesStore.updateWorkSpace({
   //   workSpace: { ...background.value, ...props },
   // });
@@ -677,8 +681,8 @@ const updateBackground = (props: Partial<WorkSpaceElement>) => {
   //   id: workSpaceDraw.id,
   //   props: { ...workProps, ...props },
   // });
-  // workSpaceDraw.set({ ...props });
-  // canvas.renderAll();
+  console.log(props)
+  props.color && Object.assign(workspace, props)
 };
 
 // 修改上传背景
