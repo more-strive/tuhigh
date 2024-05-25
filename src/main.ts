@@ -30,6 +30,8 @@ async function start() {
   app.use(SvgIcon);
   app.use(Component);
   app.use(Directive);
+  // 当路由准备好时再执行挂载
+  await router.isReady();
   app.mount("#app");
 }
 
