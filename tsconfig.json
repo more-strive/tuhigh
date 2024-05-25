@@ -32,7 +32,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "types/*.d.ts",
+    "src/types/*.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
   ],
