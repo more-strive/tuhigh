@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper">
     <input type="file" @change="getSvgContent">
-    <canvas ref="canvasRef" class="background-grid"></canvas>
+    
   </div>
 </template>
 
@@ -42,14 +42,6 @@ const getSvgContent = (event) => {
   }
   reader.readAsText(file)
 }
-
-onMounted(() => {
-  leaferCanvas.value = new Leafer({
-    view: canvasRef.value, // 支持 window 、div、canvas 标签对象， 可使用id字符串(不用加 # 号)
-    width: 1200, // 不能设置为 0， 否则会变成自动布局
-    height: 600,
-  })
-})
 </script>
 
 <style scoped>

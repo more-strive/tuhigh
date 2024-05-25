@@ -1,5 +1,4 @@
 import { storeToRefs } from "pinia";
-import { unref } from "vue";
 import { useFabricStore, useTemplatesStore } from "@/store";
 import { useMainStore } from "@/store/modules/main";
 import { RightStates, ElementNames } from "@/types/elements";
@@ -21,6 +20,9 @@ import useCenter from "@/logic/Canvas/useCenter";
 import useCanvas from "@/logic/Canvas/useCanvas";
 import useCanvasZindex from "./useCanvasZindex";
 
+
+// 测试代码
+import {  Text } from 'leafer-ui'
 
 export default () => {
 
@@ -46,34 +48,48 @@ export default () => {
       createVerticalTextElement(fontSize, textHollow, textValue)
       return
     }
-    const { centerPoint } = useCenter();
-    const textBoxElement = new Textbox(textValue, {
+    const [canvas] = useCanvas();
+    const { centerPoint, left,top } = useCenter();
+    canvas.tree.add(new Text({
       id: nanoid(10),
-      left: centerPoint.x,
-      top: centerPoint.y,
-      fontSize,
-      fontFamily: systemFonts.value[0].value,
-      fillType: 0,
-      hasControls: true,
-      hasBorders: true,
-      fontWeight: "normal",
-      charSpacing: 3,
-      opacity: 1,
-      lineHeight: 1.3,
-      originX: "left",
-      originY: "top",
-      textAlign: "justify-center",
-      name: ElementNames.TEXTBOX,
-      splitByGrapheme: false,
-      width: fontSize * textValue.length / 2
-    });
-    textBoxElement.set({ left: textBoxElement.left - textBoxElement.width / 2, top: textBoxElement.top - textBoxElement.height / 2, splitByGrapheme: true })
-    if (textHollow) {
-      textBoxElement.fill = "";
-      textBoxElement.stroke = "black";
-      textBoxElement.strokeWidth = 1;
-    }
-    renderCanvas(textBoxElement);
+        x: left,
+        y: top,
+        fontSize,
+        fontFamily: systemFonts.value[0].value,
+        fontWeight: "normal",
+        opacity: 1,
+        // lineHeight: 1.3,
+        textAlign: "center",
+        text:textValue,
+        // width: fontSize * textValue.length / 2
+    }))
+    // const textBoxElement = new Textbox(textValue, {
+    //   id: nanoid(10),
+    //   left: centerPoint.x || 0,
+    //   top: centerPoint.y|| 0,
+    //   fontSize,
+    //   fontFamily: systemFonts.value[0].value,
+    //   fillType: 0,
+    //   hasControls: true,
+    //   hasBorders: true,
+    //   fontWeight: "normal",
+    //   charSpacing: 3,
+    //   opacity: 1,
+    //   lineHeight: 1.3,
+    //   originX: "left",
+    //   originY: "top",
+    //   textAlign: "justify-center",
+    //   name: ElementNames.TEXTBOX,
+    //   splitByGrapheme: false,
+    //   width: fontSize * textValue.length / 2
+    // });
+    // textBoxElement.set({ left: textBoxElement.left - textBoxElement.width / 2, top: textBoxElement.top - textBoxElement.height / 2, splitByGrapheme: true })
+    // if (textHollow) {
+    //   textBoxElement.fill = "";
+    //   textBoxElement.stroke = "black";
+    //   textBoxElement.strokeWidth = 1;
+    // }
+    // renderCanvas(textBoxElement);
   };
 
   const createArcTextElement = (fontSize: number, textStyle = 'transverse', textHollow = false, textValue = '双击修改文字') => {

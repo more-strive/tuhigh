@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     ref="wrapperRef" 
     @mousedown="addDrawAreaFocus"
     v-contextmenu="contextMenus" 
@@ -60,4 +60,4 @@ const remDrawAreaFocus = () => {
   background-position: var(--offsetX) var(--offsetY), calc(var(--size) + var(--offsetX)) calc(var(--size) + var(--offsetY));
   background-size: calc(var(--size) * 2) calc(var(--size) * 2);
 }
-</style>@/logic/Canvas/usePixi
+</style>

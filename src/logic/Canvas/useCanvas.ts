@@ -15,9 +15,7 @@ import '@leafer-in/editor'
 let app: null | App = null
 
 // 初始化配置
-const initConf = () => {
-  
-}
+// const initConf = () => {}
 
 // 更新视图区长宽
 const setCanvasTransform = () => {
@@ -25,13 +23,13 @@ const setCanvasTransform = () => {
   const leaferStore = useLeaferStore()
   const { wrapperRef } = storeToRefs(leaferStore)
   const { width, height } = useElementBounding(wrapperRef.value)
-  const background = app.ground.findOne('#background')
+  // const background = app.ground.findOne('#background')
   const workspace = app.tree.findOne('#workspace')
-  background.set({width: width.value, height: height.value})
+  // background.set({width: width.value, height: height.value})
   if (!workspace.width) return
   if (!workspace.height) return
   workspace.set({x: width.value / 2 - workspace.width / 2, y: height.value / 2 - workspace.height / 2})
-  console.log(background)
+  // console.log(background)
 }
 
 const initCanvas = () => {
@@ -40,18 +38,18 @@ const initCanvas = () => {
   if (!canvasRef.value) return
   app = new App({ 
     view: canvasRef.value,
-    ground: { type: 'draw' },
-    tree: {},
-    sky: { type: 'draw' }
+    ground: { type: 'draw' }, // 底层
+    tree: {}, // 内容
+    sky: { type: 'draw' } // 顶层, 考虑由于水印
 })
 
-  const background = new Rect({ id: 'background', width: 800, height: 600, fill: '' })
-  const rect = new Frame({ id: 'workspace', x: 100, y: 100, width: 800, height: 600, fill: 'pink', draggable: false })
-  const border = new Rect({ x: 200, y: 200, stroke: 'blue', draggable: true })
+  // const background = new Rect({ id: 'background', width: 800, height: 600, fill: '' })
+  const rect = new Frame({ id: 'workspace', x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
+  // const border = new Rect({ x: 200, y: 200, stroke: 'blue', draggable: true })
 
-  app.ground.add(background)
+  // app.ground.add(background)
   app.tree.add(rect)
-  app.sky.add(border)
+  // app.sky.add(border)
   // const keybinding = new Keybinding()
   // new FabricTool(canvas)
   // new FabricGuide(canvas)
@@ -87,7 +85,7 @@ const initTemplate = async () => {
 export const initEditor = async () => {
   const leaferStore = useLeaferStore()
   const { wrapperRef } = storeToRefs(leaferStore)
-  initConf()
+  // initConf()
   initCanvas()
   initTemplate()
   const { width, height } = useElementBounding(wrapperRef.value)

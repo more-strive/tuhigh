@@ -661,20 +661,24 @@ const changeBackgroundType = (type: number) => {
 // 设置背景
 const updateBackground = (props: Partial<WorkSpaceElement>) => {
   const [canvas] = useCanvas();
-  const workSpaceDraw = canvas
-    .getObjects()
-    .filter((item) => item.id === WorkSpaceDrawType)[0];
-  if (!workSpaceDraw) return;
-  templatesStore.updateWorkSpace({
-    workSpace: { ...background.value, ...props },
-  });
-  const workProps = workSpaceDraw.toObject(propertiesToInclude as any[]);
-  templatesStore.updateElement({
-    id: workSpaceDraw.id,
-    props: { ...workProps, ...props },
-  });
-  workSpaceDraw.set({ ...props });
-  canvas.renderAll();
+  const workspace = canvas.tree.findOne('#workspace')
+  console.log(props)
+  props.color &&  (workspace.fill = props.color)
+
+  // const workSpaceDraw = canvas
+  //   .getObjects()
+  //   .filter((item) => item.id === WorkSpaceDrawType)[0];
+  // if (!workSpaceDraw) return;
+  // templatesStore.updateWorkSpace({
+  //   workSpace: { ...background.value, ...props },
+  // });
+  // const workProps = workSpaceDraw.toObject(propertiesToInclude as any[]);
+  // templatesStore.updateElement({
+  //   id: workSpaceDraw.id,
+  //   props: { ...workProps, ...props },
+  // });
+  // workSpaceDraw.set({ ...props });
+  // canvas.renderAll();
 };
 
 // 修改上传背景
