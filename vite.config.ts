@@ -63,7 +63,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         resolvers: [ElementPlusResolver()],
       }),
       Components({
-        dts: './src/types/el-components.d.ts',
+        dts: './src/types/element-components.d.ts',
         resolvers: [ElementPlusResolver()],
       }),
       // VitePWA({

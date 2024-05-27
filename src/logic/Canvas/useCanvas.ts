@@ -31,7 +31,7 @@ const setCanvasTransform = () => {
   const { wrapperRef } = storeToRefs(leaferStore)
   const { width, height } = useElementBounding(wrapperRef.value)
   // const background = app.ground.findOne('#background')
-  const workspace = app.tree.findOne('#workspace')
+  const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
   // background.set({width: width.value, height: height.value})
   if (!workspace.width) return
   if (!workspace.height) return
