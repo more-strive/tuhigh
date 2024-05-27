@@ -14,7 +14,7 @@ import { FabricCanvas } from '@/app/fabricCanvas'
 import { useTemplatesStore, useLeaferStore } from '@/store'
 import useCommon from './useCommon'
 import useHammer from './useHammer'
-import '@leafer-in/editor'
+import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
 
 
@@ -43,28 +43,18 @@ const initCanvas = () => {
   const leaferStore = useLeaferStore()
   const { canvasRef } = storeToRefs(leaferStore)
   if (!canvasRef.value) return
+  
   app = new App({ 
     view: canvasRef.value,
     ground: { type: 'draw' }, // 底层
     tree: {}, // 内容
     sky: { type: 'draw' } // 顶层, 考虑由于水印
-})
+  })
+  app.editor = new Editor()
 
-  // const background = new Rect({ id: 'background', width: 800, height: 600, fill: '' })
-  const rect = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
-  // const border = new Rect({ x: 200, y: 200, stroke: 'blue', draggable: true })
-
-  // app.ground.add(background)
-  app.tree.add(rect)
-  // app.sky.add(border)
-  // const keybinding = new Keybinding()
-  // new FabricTool(canvas)
-  // new FabricGuide(canvas)
-  // new HoverBorders(canvas)
-  // new WheelScroll(canvas)
-  // new FabricRuler(canvas)
-  // canvas.preserveObjectStacking = true
-  // canvas.renderAll()
+  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
+  app.tree.add(frame)
+  app.sky.add(app.editor)
 }
 
 const initEvent = () => {

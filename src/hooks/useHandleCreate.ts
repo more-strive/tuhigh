@@ -23,7 +23,6 @@ import useCanvasZindex from "./useCanvasZindex";
 
 // 测试代码
 import { Text } from 'leafer-ui'
-import '@leafer-in/editor'
 
 export default () => {
 
@@ -61,7 +60,12 @@ export default () => {
       opacity: 1,
       textAlign: "center",
       text: textValue,
-      editable: true
+      editable: true,
+      // lineHeight: 1,
+      // lineHeight: {
+      //   type: 'percent',
+      //   value: 1,
+      // }
     }))
   };
 
