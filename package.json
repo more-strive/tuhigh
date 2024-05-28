@@ -17,6 +17,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "@icon-park/vue-next": "^1.4.2",
     "@leafer-in/editor": "^1.0.0-rc.22",
+    "@leafer-in/view": "^1.0.0-rc.23",
     "@pixi/webworker": "^7.3.3",
     "@vueuse/core": "^10.6.1",
     "@vueuse/shared": "^10.6.1",

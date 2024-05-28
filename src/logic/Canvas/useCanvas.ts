@@ -7,7 +7,7 @@
  */
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect, Frame } from 'leafer-ui'
+import { Leafer, App, Rect, Frame, Text, defineKey } from 'leafer-ui'
 import { useElementBounding } from '@vueuse/core'
 import { isMobile } from '@/utils/common'
 import { FabricCanvas } from '@/app/fabricCanvas'
@@ -16,13 +16,26 @@ import useCommon from './useCommon'
 import useHammer from './useHammer'
 import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
+// import '@leafer-in/editor'
+// import '@leafer-in/view'
 
 
 
 let app: null | App = null
 
 // 初始化配置
-// const initConf = () => {}
+const initConf = () => {
+  Text.setEditConfig({
+    editSize: 'size' // 使用对象
+  })
+
+  // Text.setEditConfig(function (text: Text) {
+  //   return {  // 使用函数返回对象，可增加业务逻辑分流
+  //     editSize: text.get('width') ? 'size' : 'scale'
+  //   }
+  // })
+  
+}
 
 // 更新视图区长宽
 const setCanvasTransform = () => {
@@ -48,9 +61,15 @@ const initCanvas = () => {
     view: canvasRef.value,
     ground: { type: 'draw' }, // 底层
     tree: {}, // 内容
-    sky: { type: 'draw' } // 顶层, 考虑由于水印
+    sky: { type: 'draw' }, // 顶层, 考虑由于水印
+    editor: {
+      point: { cornerRadius: 0 },
+      middlePoint: {},
+      rotatePoint: { width: 16, height: 16 },
+      // rect: { dashPattern: [3, 2] }
+    },
   })
-  app.editor = new Editor()
+  app.editor = new Editor({strokeWidth: 1})
 
   const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
   app.tree.add(frame)
@@ -82,8 +101,9 @@ const initTemplate = async () => {
 export const initEditor = async () => {
   const leaferStore = useLeaferStore()
   const { wrapperRef } = storeToRefs(leaferStore)
-  // initConf()
+  
   initCanvas()
+  initConf()
   initTemplate()
   const { width, height } = useElementBounding(wrapperRef.value)
   watch([width, height], () => {
