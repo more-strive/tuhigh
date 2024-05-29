@@ -22,8 +22,8 @@ export default () => {
     width = workspace.width || 0, height = workspace.height || 0
     left = workspace.x || 0
     top = workspace.y || 0
-    centerPoint.x = left + width / 2
-    centerPoint.y = top + height / 2
+    centerPoint.x = width / 2
+    centerPoint.y = height / 2
   }
   
   console.log(width, height, left, top)

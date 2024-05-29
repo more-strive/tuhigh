@@ -19,6 +19,7 @@ import { i18nObj } from "@/plugins/i18n/index"
 import useCenter from "@/logic/Canvas/useCenter";
 import useCanvas from "@/logic/Canvas/useCanvas";
 import useCanvasZindex from "./useCanvasZindex";
+import { CanvasTypes } from '@/enums'
 
 
 // 测试代码
@@ -40,22 +41,22 @@ export default () => {
     // rightState.value = RightStates.ELEMENT_STYLE;
     // setZindex(canvas);
     // canvas.renderAll();
-    canvas.tree.add(element)
+    canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(element)
     // templatesStore.modifedElement();
   };
 
   const createTextElement = (fontSize: number, textStyle = "transverse", textHollow = false, textValue = t("default.textValue")) => {
     const [ canvas ] = useCanvas();
     const { left, top, centerPoint } = useCenter();
-    const text = new Text({
+    const textElement = new Text({
       id: nanoid(10),
-      x: centerPoint.x,
-      y: centerPoint.y,
+      x: 0,
+      y: 0,
       fontSize,
       fontFamily: systemFonts.value[0].value,
       fontWeight: "normal",
       opacity: 1,
-      textAlign: "center",
+      textAlign: "left",
       text: textValue,
       editable: true,
       // lineHeight: 1,
@@ -64,7 +65,9 @@ export default () => {
       //   value: 1,
       // }
     })
-    renderCanvas(text)
+    textElement.x = centerPoint.x - textElement.width;
+    textElement.y = centerPoint.y - textElement.height;
+    renderCanvas(textElement)
   };
 
   const createArcTextElement = (fontSize: number, textStyle = 'transverse', textHollow = false, textValue = '双击修改文字') => {
@@ -132,14 +135,14 @@ export default () => {
     const pathElement = new Path({
       id: nanoid(10),
       path,
-      x: left ? left : centerPoint.x,
-      y: top ? top : centerPoint.y,
+      x: left ? left : 0,
+      y: top ? top : 0,
       opacity: 1,
       fill: "#ff5e17",
       editable: true
     });
-    pathElement.x -= pathElement.width / 2;
-    pathElement.y -= pathElement.height / 2;
+    pathElement.x = centerPoint.x - pathElement.width;
+    pathElement.y = centerPoint.y - pathElement.height;
     renderCanvas(pathElement);
   };
 
