@@ -1,15 +1,17 @@
 <template>
   <div ref="wrapper">
     <input type="file" @change="getSvgContent">
-    
+    <canvas ref="canvasRef" class="background-grid" height="600"></canvas>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, watch, ref } from 'vue'
-import { Leafer, Path } from 'leafer-ui'
+import { Leafer, Path, Text, App, Rect } from 'leafer-ui'
 import { loadSVGFromString } from '@/extension/parser/loadSVGFromString'
-const canvasRef = ref<HtmlCanvasElement | null>()
+import { Editor } from '@leafer-in/editor'
+import '@leafer-in/view'
+const canvasRef = ref<HTMLCanvasElement | null>(null)
 const leaferCanvas = ref()
 
 const getSvgContent = (event) => {
@@ -42,10 +44,47 @@ const getSvgContent = (event) => {
   }
   reader.readAsText(file)
 }
+onMounted(() => {
+  if (!canvasRef.value) return
+  // leaferCanvas.value = new Leafer({
+  //   view: canvasRef.value,
+  //   height: 800,
+  //   width: 1200
+  // })
+  const app = new App({ view: canvasRef.value, height: 600, width: 1600 }) 
+
+  app.tree = app.addLeafer()
+  app.sky = app.addLeafer({ type: 'draw', usePartRender: false })
+
+  app.editor = new Editor()
+  app.sky.add(app.editor)
+
+  app.tree.add(Rect.one({ editable: true, fill: '#FEB027', cornerRadius: [20, 0, 0, 20] }, 100, 100))
+  app.tree.add(Rect.one({ editable: true, fill: '#FFE04B', cornerRadius: [0, 20, 20, 0] }, 300, 100))
+
+  const text = new Text({
+    id: 'text1',
+    x: 100,
+    y: 200,
+    fontSize: 16,
+    fontWeight: "normal",
+    opacity: 1,
+    textAlign: "center",
+    text: '双击修改文字',
+    editable: true,
+    // lineHeight: 1,
+    // lineHeight: {
+    //   type: 'percent',
+    //   value: 1,
+    // }
+  })
+  leaferCanvas.value.add(text)
+})
 </script>
 
 <style scoped>
 .background-grid {
+  margin: 0 auto;
   --offsetX: 0px;
   --offsetY: 0px;
   --size: 8px;

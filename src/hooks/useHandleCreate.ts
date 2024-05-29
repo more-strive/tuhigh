@@ -45,10 +45,6 @@ export default () => {
   };
 
   const createTextElement = (fontSize: number, textStyle = "transverse", textHollow = false, textValue = t("default.textValue")) => {
-    if (textStyle === "direction") {
-      createVerticalTextElement(fontSize, textHollow, textValue)
-      return
-    }
     const [ canvas ] = useCanvas();
     const { left, top, centerPoint } = useCenter();
     const text = new Text({

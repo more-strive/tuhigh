@@ -16,10 +16,6 @@ import useCommon from './useCommon'
 import useHammer from './useHammer'
 import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
-// import '@leafer-in/editor'
-// import '@leafer-in/view'
-
-
 
 let app: null | App = null
 
@@ -54,26 +50,21 @@ const setCanvasTransform = () => {
 
 const initCanvas = () => {
   const leaferStore = useLeaferStore()
-  const { canvasRef } = storeToRefs(leaferStore)
+  const { canvasRef, wrapperRef } = storeToRefs(leaferStore)
   if (!canvasRef.value) return
-  
+  if (!wrapperRef.value) return
   app = new App({ 
     view: canvasRef.value,
-    ground: { type: 'draw' }, // 底层
-    tree: {}, // 内容
-    sky: { type: 'draw' }, // 顶层, 考虑由于水印
-    editor: {
-      point: { cornerRadius: 0 },
-      middlePoint: {},
-      rotatePoint: { width: 16, height: 16 },
-      // rect: { dashPattern: [3, 2] }
-    },
+    
   })
-  app.editor = new Editor({strokeWidth: 1})
+  app.tree = app.addLeafer()
+  app.sky = app.addLeafer({ type: 'draw', usePartRender: false })
+
+  app.editor = new Editor()
+  app.sky.add(app.editor)
 
   const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
   app.tree.add(frame)
-  app.sky.add(app.editor)
 }
 
 const initEvent = () => {
