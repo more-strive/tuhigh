@@ -1,8 +1,9 @@
 // https://www.typescriptlang.org/docs/handbook/utility-types.html
 // import type { Gradient } from './gradient/Gradient';
-// import type { Pattern } from './Pattern';
+import type { Pattern } from '@/extension/pattern/Pattern';
+import type { Point } from './point/Point';
 // import type { XY, Point } from './Point';
-import type { Object as BaseFabricObject, XY, Point, Pattern, Gradient } from 'fabric';
+import type { Object as BaseFabricObject, Gradient } from 'fabric';
 
 interface NominalTag<T> {
   nominalTag?: T;
@@ -16,8 +17,14 @@ type TNonFunctionPropertyNames<T> = {
 }[keyof T];
 export type TClassProperties<T> = Pick<T, TNonFunctionPropertyNames<T>>;
 
-// https://github.com/microsoft/TypeScript/issues/32080
+
 export type Constructor<T = object> = new (...args: any[]) => T;
+
+export interface XY {
+  x: number;
+  y: number;
+}
+
 
 const enum Degree {}
 const enum Radian {}

@@ -1,4 +1,4 @@
-import type { TRadian, TDegree } from 'fabric';
+import type { TRadian, TDegree } from '../../typedefs';
 import { PiBy180 } from '../../constants';
 
 /**

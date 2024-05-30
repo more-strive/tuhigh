@@ -1,4 +1,4 @@
-import type { TRadian } from 'fabric';
+import type { TRadian } from '../../typedefs';
 import { halfPI } from '../../constants';
 
 export const sin = (angle: TRadian): number => {

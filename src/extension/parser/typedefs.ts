@@ -1,7 +1,7 @@
-import type { Object as FabricObject } from 'fabric';
+
 
 export type SVGParsingOutput = {
-  objects: (FabricObject | null)[];
+  objects: (any | null)[];
   options: Record<string, any>;
   elements: Element[];
   allElements: Element[];
@@ -9,7 +9,16 @@ export type SVGParsingOutput = {
 
 export type TSvgReviverCallback = (
   element: Element,
-  fabricObject: FabricObject
+  leaferObject: any
 ) => void;
+
+export type TMat2D = [
+  a: number,
+  b: number,
+  c: number,
+  d: number,
+  e: number,
+  f: number
+];
 
 export type CSSRules = Record<string, Record<string, string>>;

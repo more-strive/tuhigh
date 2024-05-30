@@ -1,4 +1,4 @@
-import type { XY } from 'fabric';
+import type { XY } from './typedefs';
 
 /**
  * Parses "points" attribute, returning an array of values

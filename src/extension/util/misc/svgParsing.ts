@@ -6,7 +6,9 @@ import type {
   SVGElementName,
   SupportedSVGUnit,
 } from 'fabric';
-import { config, Color } from 'fabric';
+// import { config, Color } from 'fabric';
+import { config } from '@/extension/config';
+import { Color } from '@/extension/color/Color';
 import { toFixed } from './toFixed';
 
 /**

@@ -1,4 +1,4 @@
-import { Color, Object as FabricObject } from 'fabric';
+import { Color } from '@/extension/color/Color';
 import { toFixed } from '../util/misc/toFixed';
 
 const colorAttributesMap = {

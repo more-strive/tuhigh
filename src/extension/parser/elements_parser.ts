@@ -9,18 +9,11 @@ import { getGradientDefs } from './getGradientDefs';
 import { getCSSRules } from './getCSSRules';
 import type { CSSRules, TSvgReviverCallback } from './typedefs';
 import type { ParsedViewboxTransform } from './applyViewboxTransform';
-import type { SVGOptions, Object as FabricObject } from 'fabric';
 import type { LoadImageOptions } from '../util/misc/objectEnlive';
-import { Gradient, Group, classRegistry, Point } from 'fabric';
-import { Image } from '../object/Image';
-import { IText } from '../object/IText';
 import { nanoid } from 'nanoid';
 
 const findTag = (el: Element) => {
-  const tag = el.tagName.toLowerCase().replace('svg:', '')
-  if (tag === 'image') return Image
-  if (tag === 'text') return IText
-  return classRegistry.getSVGClass(el.tagName.toLowerCase().replace('svg:', ''));
+  return el.tagName.toLowerCase().replace('svg:', '')
 }
 
 type StorageType = {
@@ -30,7 +23,7 @@ type StorageType = {
   mask: Element[];
 };
 
-type NotParsedFabricObject = FabricObject & {
+type NotParsedFabricObject = {} & {
   fill: string;
   stroke: string;
   clipPath?: string;
@@ -68,13 +61,13 @@ export class ElementsParser {
     this.cssRules = getCSSRules(doc);
   }
 
-  parse(): Promise<Array<FabricObject | null>> {
+  parse(): Promise<Array<any | null>> {
     return Promise.all(
       this.elements.map((element) => this.createObject(element))
     );
   }
 
-  async createObject(el: Element): Promise<FabricObject | null> {
+  async createObject(el: Element): Promise<any | null> {
     const klass = findTag(el);
     if (klass) {
       const obj: NotParsedFabricObject = await klass.fromElement(

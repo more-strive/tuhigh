@@ -1,4 +1,4 @@
-export function selectorMatches(element: HTMLElement, selector: string) {
+export const selectorMatches = (element: HTMLElement, selector: string): boolean => {
   const nodeName = element.nodeName;
   const classNames = element.getAttribute('class');
   const id = element.getAttribute('id');

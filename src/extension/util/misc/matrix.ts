@@ -1,4 +1,5 @@
-import { TMat2D, Point, TDegree, XY } from "fabric"; 
+import { TMat2D, TDegree, XY } from "../../typedefs"; 
+import { Point } from "@/extension/point/Point";
 import { degreesToRadians, radiansToDegrees } from './radiansDegreesConversion';
 import { iMatrix } from '../../constants'
 import { cos } from './cos';

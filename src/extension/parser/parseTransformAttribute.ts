@@ -1,6 +1,6 @@
 import { iMatrix } from '../constants';
 import { reNum } from './constants';
-import type { TMat2D } from 'fabric';
+import type { TMat2D } from '../typedefs';
 import { cleanupSvgAttribute } from '../util/internals/cleanupSvgAttribute';
 import {
   createRotateMatrix,

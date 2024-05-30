@@ -1,4 +1,4 @@
-import { ifNaN } from '../util/internals/ifNaN';
+import { ifNaN } from '../util/internals/ifNaNbak';
 import { capValue } from '../util/misc/capValue';
 
 const RE_PERCENT = /^(\d+\.\d+)%|(\d+)%$/;

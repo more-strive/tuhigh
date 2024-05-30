@@ -1,10 +1,9 @@
 import { CENTER } from '../constants';
-import type { Image, Object as FabricObject, TMat2D } from 'fabric';
+// import type { Image, Object as FabricObject, TMat2D } from 'fabric';
+import type { TMat2D } from '../typedefs'
 import { qrDecompose } from './misc/matrix';
 
-type FabricObjectWithTransformMatrix = FabricObject & {
-  transformMatrix?: TMat2D;
-};
+type FabricObjectWithTransformMatrix = any & {transformMatrix?: TMat2D};
 
 /**
  * This function is an helper for svg import. it decompose the transformMatrix
@@ -48,8 +47,8 @@ export const removeTransformMatrixForSvgParsing = (
   if (preserveAspectRatioOptions) {
     object.scaleX *= preserveAspectRatioOptions.scaleX;
     object.scaleY *= preserveAspectRatioOptions.scaleY;
-    (object as Image).cropX = preserveAspectRatioOptions.cropX;
-    (object as Image).cropY = preserveAspectRatioOptions.cropY;
+    object.cropX = preserveAspectRatioOptions.cropX;
+    object.cropY = preserveAspectRatioOptions.cropY;
     center.x += preserveAspectRatioOptions.offsetLeft;
     center.y += preserveAspectRatioOptions.offsetTop;
     object.width = preserveAspectRatioOptions.width;
