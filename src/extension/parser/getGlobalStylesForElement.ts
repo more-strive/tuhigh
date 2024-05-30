@@ -1,10 +1,6 @@
 import { elementMatchesRule } from './elementMatchesRule';
 import type { CSSRules } from './typedefs';
 
-/**
- * @private
- */
-
 export function getGlobalStylesForElement(
   element: HTMLElement,
   cssRules: CSSRules = {}

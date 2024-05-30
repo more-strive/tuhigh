@@ -1,11 +1,11 @@
-import { getFabricDocument } from 'fabric';
+// import { getFabricDocument } from 'fabric';
 import type { ImageFormat } from '../../typedefs';
 /**
  * Creates canvas element
  * @return {CanvasElement} initialized canvas element
  */
 export const createCanvasElement = (): HTMLCanvasElement => {
-  const element = getFabricDocument().createElement('canvas');
+  const element = document.createElement('canvas');
   if (!element || typeof element.getContext === 'undefined') {
     throw new Error('Failed to create `canvas` element');
   }
@@ -16,8 +16,7 @@ export const createCanvasElement = (): HTMLCanvasElement => {
  * Creates image element (works on client and node)
  * @return {HTMLImageElement} HTML image element
  */
-export const createImage = (): HTMLImageElement =>
-  getFabricDocument().createElement('img');
+export const createImage = (): HTMLImageElement => document.createElement('img');
 
 /**
  * Creates a canvas element that is a copy of another and is also painted

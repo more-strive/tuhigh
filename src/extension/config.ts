@@ -22,10 +22,6 @@ class BaseConfiguration {
    */
   DPI = 96;
 
-  /**
-   * Device Pixel Ratio
-   * @see https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/SettingUptheCanvas/SettingUptheCanvas.html
-   */
   devicePixelRatio =
     typeof window !== 'undefined' ? window.devicePixelRatio : 1; // eslint-disable-line no-restricted-globals
 

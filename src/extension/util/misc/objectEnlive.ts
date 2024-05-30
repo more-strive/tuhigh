@@ -2,7 +2,7 @@ import { noop } from '../../constants';
 import type { FabricObject } from 'fabric';
 import type { Abortable, TCrossOrigin, TFiller } from '../../typedefs';
 import { createImage } from './dom';
-import { classRegistry, Pattern } from 'fabric';
+// import { classRegistry, Pattern } from 'fabric';
 import type { filters } from 'fabric';
 import type { FabricObject as BaseFabricObject } from 'fabric';
 
@@ -74,9 +74,7 @@ export type EnlivenObjectOptions = Abortable & {
  * @param {AbortSignal} [options.signal] handle aborting, see https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal
  * @returns {Promise<FabricObject[]>}
  */
-export const enlivenObjects = <
-  T extends BaseFabricObject | FabricObject | filters.BaseFilter
->(
+export const enlivenObjects = <T extends BaseFabricObject | FabricObject | filters.BaseFilter>(
   objects: any[],
   { signal, reviver = noop }: EnlivenObjectOptions = {}
 ) =>
@@ -102,8 +100,7 @@ export const enlivenObjects = <
       .catch((error) => {
         // cleanup
         instances.forEach((instance) => {
-          (instance as FabricObject).dispose &&
-            (instance as FabricObject).dispose();
+          (instance as FabricObject).dispose && (instance as FabricObject).dispose();
         });
         reject(error);
       })

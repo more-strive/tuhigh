@@ -1,8 +1,8 @@
-import type { TMat2D } from 'fabric';
+import type { TMat2D } from './typedefs';
 // // use this syntax so babel plugin see this import here
-import { version } from 'fabric';
+// import { version } from 'fabric';
 
-export const VERSION = version;
+// export const VERSION = version;
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export function noop() {}
 export const halfPI = Math.PI / 2;

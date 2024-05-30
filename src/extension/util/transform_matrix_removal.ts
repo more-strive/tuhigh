@@ -1,5 +1,4 @@
 import { CENTER } from '../constants';
-// import type { Image, Object as FabricObject, TMat2D } from 'fabric';
 import type { TMat2D } from '../typedefs'
 import { qrDecompose } from './misc/matrix';
 

@@ -1,4 +1,4 @@
-import { getFabricWindow } from 'fabric';
+// import { getFabricWindow } from 'fabric';
 import { noop } from '../../constants';
 import type { Abortable } from '../../typedefs';
 
@@ -18,7 +18,7 @@ type requestOptions = Abortable & {
 
 export function request(url: string, options: requestOptions = {}) {
   const onComplete = options.onComplete || noop,
-    xhr = new (getFabricWindow().XMLHttpRequest)(),
+    xhr = new (window.XMLHttpRequest)(),
     signal = options.signal,
     abort = function () {
       xhr.abort();
