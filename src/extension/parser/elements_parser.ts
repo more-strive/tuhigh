@@ -11,9 +11,12 @@ import type { CSSRules, TSvgReviverCallback } from './typedefs';
 import type { ParsedViewboxTransform } from './applyViewboxTransform';
 import type { LoadImageOptions } from '../util/misc/objectEnlive';
 import { nanoid } from 'nanoid';
+import { Path, Text } from 'leafer-ui';
 
 const findTag = (el: Element) => {
-  return el.tagName.toLowerCase().replace('svg:', '')
+  const tag = el.tagName.toLowerCase().replace('svg:', '')
+  if (tag === 'text') return Text
+  else if (tag === 'path') return Path
 }
 
 type StorageType = {
@@ -70,7 +73,7 @@ export class ElementsParser {
   async createObject(el: Element): Promise<any | null> {
     const klass = findTag(el);
     if (klass) {
-      const obj: NotParsedFabricObject = await klass.fromElement(
+      const obj = new klass(
         el,
         this.options,
         this.cssRules
@@ -94,11 +97,7 @@ export class ElementsParser {
     return null;
   }
 
-  extractPropertyDefinition(
-    obj: NotParsedFabricObject,
-    property: 'fill' | 'stroke' | 'clipPath' | 'mask',
-    storage: Record<string, StorageType[typeof property]>
-  ): StorageType[typeof property] | undefined {
+  extractPropertyDefinition(obj: NotParsedFabricObject, property: 'fill' | 'stroke' | 'clipPath' | 'mask', storage: Record<string, StorageType[typeof property]>): StorageType[typeof property] | undefined {
     const value = obj[property]!,
       regex = this.regexUrl;
     if (!regex.test(value)) {
@@ -113,32 +112,20 @@ export class ElementsParser {
     return storage[id];
   }
 
-  resolveGradient(
-    obj: NotParsedFabricObject,
-    el: Element,
-    property: 'fill' | 'stroke'
-  ) {
-    const gradientDef = this.extractPropertyDefinition(
-      obj,
-      property,
-      this.gradientDefs
-    ) as SVGGradientElement;
+  resolveGradient(obj: NotParsedFabricObject, el: Element, property: 'fill' | 'stroke') {
+    const gradientDef = this.extractPropertyDefinition(obj, property, this.gradientDefs) as SVGGradientElement;
     if (gradientDef) {
       const opacityAttr = el.getAttribute(property + '-opacity');
-      const gradient = Gradient.fromElement(gradientDef, obj, {
-        ...this.options,
-        opacity: opacityAttr,
-      } as SVGOptions);
-      obj.set(property, gradient);
+      // const gradient = Gradient.fromElement(gradientDef, obj, {
+      //   ...this.options,
+      //   opacity: opacityAttr,
+      // } as SVGOptions);
+      // obj.set(property, gradient);
     }
   }
 
   async resolveClipPath(obj: NotParsedFabricObject, usingElement: Element) {
-    const clipPathElements = this.extractPropertyDefinition(
-      obj,
-      'clipPath',
-      this.clipPaths
-    ) as Element[];
+    const clipPathElements = this.extractPropertyDefinition(obj, 'clipPath', this.clipPaths) as Element[];
     if (clipPathElements) {
       const objTransformInv = invertTransform(obj.calcTransformMatrix());
       // move the clipPath tag as sibling to the real element that is using it
@@ -153,9 +140,7 @@ export class ElementsParser {
       clipPathOwner.parentElement!.appendChild(clipPathTag!);
       const container = await Promise.all(
         clipPathElements.map((clipPathElement) => {
-          return findTag(clipPathElement)
-            .fromElement(clipPathElement, this.options, this.cssRules)
-            .then((enlivedClippath: NotParsedFabricObject) => {
+          return findTag(clipPathElement).fromElement(clipPathElement, this.options, this.cssRules).then((enlivedClippath: NotParsedFabricObject) => {
               removeTransformMatrixForSvgParsing(enlivedClippath);
               enlivedClippath.fillRule = enlivedClippath.clipRule!;
               delete enlivedClippath.clipRule;

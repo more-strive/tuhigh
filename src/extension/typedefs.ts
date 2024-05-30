@@ -56,14 +56,6 @@ export type SVGElementName = 'linearGradient' | 'radialGradient' | 'stop';
 
 export type SupportedSVGUnit = 'mm' | 'cm' | 'in' | 'pt' | 'pc' | 'em';
 
-/**
- * A transform matrix.
- * Basically a matrix in the form
- * [ a c e ]
- * [ b d f ]
- * [ 0 0 1 ]
- * For more details, see @link https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform#matrix
- */
 export type TMat2D = [
   a: number,
   b: number,
@@ -73,10 +65,7 @@ export type TMat2D = [
   f: number
 ];
 
-/**
- * An invalid keyword and an empty string will be handled as the `anonymous` keyword.
- * @see https://developer.mozilla.org/en-US/docs/HTML/CORS_settings_attributes
- */
+
 export type TCrossOrigin = '' | 'anonymous' | 'use-credentials' | null;
 
 export type TOriginX = 'center' | 'left' | 'right' | number;
@@ -104,9 +93,7 @@ export type TCacheCanvasDimensions = {
 
 export type TRectBounds = [min: XY, max: XY];
 
-export type TToCanvasElementOptions<
-  T extends BaseFabricObject = BaseFabricObject
-> = {
+export type TToCanvasElementOptions<T> = {
   left?: number;
   top?: number;
   width?: number;
@@ -114,19 +101,14 @@ export type TToCanvasElementOptions<
   filter?: (object: T) => boolean;
 };
 
-export type TDataUrlOptions<T extends BaseFabricObject = BaseFabricObject> =
-  TToCanvasElementOptions<T> & {
-    multiplier: number;
-    format?: ImageFormat;
-    quality?: number;
-    enableRetinaScaling?: boolean;
-  };
+export type TDataUrlOptions<T> = TToCanvasElementOptions<T> & {
+  multiplier: number;
+  format?: ImageFormat;
+  quality?: number;
+  enableRetinaScaling?: boolean;
+};
 
 export type Abortable = {
-  /**
-   * handle aborting
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal
-   */
   signal?: AbortSignal;
 };
 
