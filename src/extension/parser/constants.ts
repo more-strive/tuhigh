@@ -98,3 +98,48 @@ export const reViewBoxAttrValue = new RegExp(
     '+)\\s*' +
     '$'
 );
+
+
+export const SHARED_ATTRIBUTES = [
+  'display',
+  'transform',
+  'fill',
+  'fill-opacity',
+  'fill-rule',
+  'opacity',
+  'stroke',
+  'stroke-dasharray',
+  'stroke-linecap',
+  'stroke-dashoffset',
+  'stroke-linejoin',
+  'stroke-miterlimit',
+  'stroke-opacity',
+  'stroke-width',
+  'id',
+  'paint-order',
+  'vector-effect',
+  'instantiated_by_use',
+  'clip-path',
+];
+
+export const ATTRIBUTE_NAMES = [
+  ...SHARED_ATTRIBUTES,
+  'x',
+  'y',
+  'width',
+  'height',
+  'preserveAspectRatio',
+  'xlink:href',
+  'crossOrigin',
+  'image-rendering',
+  'mask',
+  'dx',
+  'dy',
+  'font-family',
+  'font-style',
+  'font-weight',
+  'font-size',
+  'letter-spacing',
+  'text-decoration',
+  'text-anchor'
+];

@@ -12,6 +12,8 @@ import type { ParsedViewboxTransform } from './applyViewboxTransform';
 import type { LoadImageOptions } from '../util/misc/objectEnlive';
 import { nanoid } from 'nanoid';
 import { Path, Text } from 'leafer-ui';
+import { parseAttributes } from './parseAttributes'
+import { ATTRIBUTE_NAMES } from './constants'
 
 const findTag = (el: Element) => {
   const tag = el.tagName.toLowerCase().replace('svg:', '')
@@ -71,14 +73,22 @@ export class ElementsParser {
   }
 
   async createObject(el: Element): Promise<any | null> {
-    const klass = findTag(el);
-    if (klass) {
-      const obj = new klass(
-        el,
-        this.options,
-        this.cssRules
-      );
-      obj.set({id: nanoid(10)})
+    // const klass = findTag(el) as Path | Text;
+    let leaferClass = undefined
+    const tag = el.tagName.toLowerCase().replace('svg:', '')
+    if (tag === 'text') leaferClass = Text
+    else if (tag === 'path') leaferClass = Path
+    const attributes = parseAttributes(el as HTMLElement, ATTRIBUTE_NAMES, this.cssRules)
+
+    const textContent = (el.textContent || '').replace(/^\s+|\s+$|\n+/g, '').replace(/\s+/g, ' ');
+    console.log('tag:', tag, 'attributes:', attributes, 'textContent:', textContent)
+    if (leaferClass) {
+      const obj = new leaferClass({
+        id: nanoid(10),
+        x: attributes.x,
+        y: attributes.y
+        
+      });
       this.resolveGradient(obj, el, 'fill');
       this.resolveGradient(obj, el, 'stroke');
       if (obj instanceof Image && obj._originalElement) {
@@ -91,7 +101,7 @@ export class ElementsParser {
       }
       await this.resolveClipPath(obj, el);
       await this.resolveMask(obj, el);
-      this.reviver && this.reviver(el, obj as any);
+      this.reviver && this.reviver(el, obj);
       return obj;
     }
     return null;
@@ -182,21 +192,17 @@ export class ElementsParser {
   }
 
   async resolveMask(obj: NotParsedFabricObject, usingElement: Element) {
-    const maskElements = this.extractPropertyDefinition(
-      obj,
-      'mask',
-      this.masks
-    ) as Element[];
+    const maskElements = this.extractPropertyDefinition(obj, 'mask', this.masks) as Element[];
     if (maskElements) {
       const maskElement = maskElements[0] as HTMLElement
-      const maskImage = await Image.fromElement(maskElement)
-      obj.set({mask: {
-        src: maskImage?.getSrc(),
-        left: obj.left,
-        top: obj.top,
-        width: obj.width,
-        height: obj.height
-      }})
+      // const maskImage = await Image.fromElement(maskElement)
+      // obj.set({mask: {
+      //   src: maskImage?.getSrc(),
+      //   left: obj.left,
+      //   top: obj.top,
+      //   width: obj.width,
+      //   height: obj.height
+      // }})
       // if (obj instanceof Image && obj._originalElement) {
       //   console.log('maskImage:', maskImage, 'obj:', obj.id)
       //   const [ pixi ] = usePixi()
