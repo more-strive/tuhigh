@@ -14,6 +14,9 @@ import { nanoid } from 'nanoid';
 import { Path, Text } from 'leafer-ui';
 import { parseAttributes } from './parseAttributes'
 import { ATTRIBUTE_NAMES } from './constants'
+import { Image } from 'fabric/*';
+import { CanvasTypes } from '@/enums'
+import useCanvas from '@/logic/Canvas/useCanvas';
 
 const findTag = (el: Element) => {
   const tag = el.tagName.toLowerCase().replace('svg:', '')
@@ -79,37 +82,59 @@ export class ElementsParser {
     if (tag === 'text') leaferClass = Text
     else if (tag === 'path') leaferClass = Path
     const attributes = parseAttributes(el as HTMLElement, ATTRIBUTE_NAMES, this.cssRules)
-
+    const [ canvas ] = useCanvas()
     const textContent = (el.textContent || '').replace(/^\s+|\s+$|\n+/g, '').replace(/\s+/g, ' ');
-    console.log('tag:', tag, 'attributes:', attributes, 'textContent:', textContent)
-    if (leaferClass) {
-      const obj = new leaferClass({
+    console.log('tag:', tag, 'attributes:', attributes)
+    if (tag === 'text') {
+      const text = new Text({
         id: nanoid(10),
-        x: attributes.x,
-        y: attributes.y
-        
-      });
-      this.resolveGradient(obj, el, 'fill');
-      this.resolveGradient(obj, el, 'stroke');
-      if (obj instanceof Image && obj._originalElement) {
-        removeTransformMatrixForSvgParsing(
-          obj,
-          obj.parsePreserveAspectRatioAttribute()
-        );
-      } else {
-        removeTransformMatrixForSvgParsing(obj);
-      }
-      await this.resolveClipPath(obj, el);
-      await this.resolveMask(obj, el);
-      this.reviver && this.reviver(el, obj);
-      return obj;
+        width: attributes.width,
+        height: attributes.height,
+        text: attributes.text,
+        x: attributes.dx + attributes.transformMatrix[4],
+        y: attributes.dy + attributes.transformMatrix[5],
+        scaleX: attributes.transformMatrix[0],
+        scaleY: attributes.transformMatrix[3],
+        editable: true,
+        fontSize: attributes.fontSize,
+        fontFamily: attributes.fontFamily,
+      })
+      // canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
     }
+    else if (tag === 'path') {
+      const text = new Path({
+        id: nanoid(10),
+        width: attributes.width,
+        height: attributes.height,
+        path: attributes.d,
+        x: attributes.transformMatrix[4],
+        y: attributes.transformMatrix[5],
+      })
+      canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
+    }
+    // const obj = new leaferClass({
+    //   id: nanoid(10),
+    //   x: attributes.x,
+    //   y: attributes.y
+      
+    // });
+    // let obj: Image
+    this.resolveGradient(el, 'fill');
+    this.resolveGradient(el, 'stroke');
+    // if (obj instanceof Image && obj._originalElement) {
+    //   removeTransformMatrixForSvgParsing(obj, obj.parsePreserveAspectRatioAttribute());
+    // } else {
+    //   removeTransformMatrixForSvgParsing(obj);
+    // }
+    // await this.resolveClipPath(obj, el);
+    // await this.resolveMask(obj, el);
+    // this.reviver && this.reviver(el, obj);
+    // return obj;
     return null;
   }
 
-  extractPropertyDefinition(obj: NotParsedFabricObject, property: 'fill' | 'stroke' | 'clipPath' | 'mask', storage: Record<string, StorageType[typeof property]>): StorageType[typeof property] | undefined {
-    const value = obj[property]!,
-      regex = this.regexUrl;
+  extractPropertyDefinition(property: 'fill' | 'stroke' | 'clipPath' | 'mask', storage: Record<string, StorageType[typeof property]>): StorageType[typeof property] | undefined {
+    const regex = this.regexUrl, value = '';
     if (!regex.test(value)) {
       return undefined;
     }
@@ -122,8 +147,8 @@ export class ElementsParser {
     return storage[id];
   }
 
-  resolveGradient(obj: NotParsedFabricObject, el: Element, property: 'fill' | 'stroke') {
-    const gradientDef = this.extractPropertyDefinition(obj, property, this.gradientDefs) as SVGGradientElement;
+  resolveGradient(el: Element, property: 'fill' | 'stroke') {
+    const gradientDef = this.extractPropertyDefinition( property, this.gradientDefs) as SVGGradientElement;
     if (gradientDef) {
       const opacityAttr = el.getAttribute(property + '-opacity');
       // const gradient = Gradient.fromElement(gradientDef, obj, {

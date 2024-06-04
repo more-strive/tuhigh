@@ -135,6 +135,7 @@ export const ATTRIBUTE_NAMES = [
   'mask',
   'dx',
   'dy',
+  'd',
   'font-family',
   'font-style',
   'font-weight',

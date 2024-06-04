@@ -63,7 +63,7 @@ const initCanvas = () => {
   app.editor = new Editor()
   app.sky.add(app.editor)
 
-  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 800, height: 600, fill: '#fff', draggable: false })
+  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 1800, height: 1600, fill: '#fff', draggable: false })
   app.tree.add(frame)
 }
 

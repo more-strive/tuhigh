@@ -1,8 +1,10 @@
+import { Object } from 'fabric/*';
 import { CENTER } from '../constants';
 import type { TMat2D } from '../typedefs'
 import { qrDecompose } from './misc/matrix';
+import { Point } from '../point/Point';
 
-type FabricObjectWithTransformMatrix = any & {transformMatrix?: TMat2D};
+type FabricObjectWithTransformMatrix = Object & {transformMatrix?: TMat2D};
 
 /**
  * This function is an helper for svg import. it decompose the transformMatrix
@@ -10,13 +12,9 @@ type FabricObjectWithTransformMatrix = any & {transformMatrix?: TMat2D};
  * untransformed coordinates
  * @private
  */
-const _assignTransformMatrixProps = (
-  object: FabricObjectWithTransformMatrix
-) => {
+const _assignTransformMatrixProps = (object: FabricObjectWithTransformMatrix) => {
   if (object.transformMatrix) {
-    const { scaleX, scaleY, angle, skewX } = qrDecompose(
-      object.transformMatrix
-    );
+    const { scaleX, scaleY, angle, skewX } = qrDecompose(object.transformMatrix);
     object.flipX = false;
     object.flipY = false;
     object.set('scaleX', scaleX);
@@ -33,11 +31,9 @@ const _assignTransformMatrixProps = (
  * @private
  * @param {Object} preserveAspectRatioOptions
  */
-export const removeTransformMatrixForSvgParsing = (
-  object: FabricObjectWithTransformMatrix,
-  preserveAspectRatioOptions?: any
-) => {
-  let center = object._findCenterFromElement();
+export const removeTransformMatrixForSvgParsing = (object: FabricObjectWithTransformMatrix, preserveAspectRatioOptions?: any) => {
+  // let center = object._findCenterFromElement();
+  let center = new Point(object.left + object.width / 2, object.top + object.height / 2)
   if (object.transformMatrix) {
     _assignTransformMatrixProps(object);
     center = center.transform(object.transformMatrix);
@@ -55,3 +51,14 @@ export const removeTransformMatrixForSvgParsing = (
   }
   object.setPositionByOrigin(center, CENTER, CENTER);
 };
+
+
+const setPositionByOrigin = (pos: Point, originX: 'left', originY: 'top') => {
+  const center = this.translateToCenterPoint(pos, originX, originY),
+    position = this.translateToOriginPoint(
+      center,
+      this.originX,
+      this.originY
+    );
+  this.set({ left: position.x, top: position.y });
+}

@@ -26,3 +26,4 @@ dist/*
 auto-imports.d.ts
 element-components.d.ts
 *.svg
+*.mp4
