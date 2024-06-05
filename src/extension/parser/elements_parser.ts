@@ -116,13 +116,18 @@ export class ElementsParser {
       canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
     }
     else if (tag === 'path') {
+      console.log('attributes:', attributes)
       const path = new Path({
         id: nanoid(10),
         width: attributes.width,
         height: attributes.height,
         path: attributes.d,
-        x: 0,
-        y: 0,
+        fill: attributes.fill,
+        x: attributes.transformMatrix[4],
+        y: attributes.transformMatrix[5],
+        scaleX: attributes.transformMatrix[0],
+        scaleY: attributes.transformMatrix[3],
+        editable: true,
       })
       canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(path)
     }
@@ -180,10 +185,7 @@ export class ElementsParser {
       // move the clipPath tag as sibling to the real element that is using it
       const clipPathTag = clipPathElements[0].parentElement;
       let clipPathOwner = usingElement;
-      while (
-        clipPathOwner.parentElement &&
-        clipPathOwner.getAttribute('clip-path') !== obj.clipPath
-      ) {
+      while (clipPathOwner.parentElement && clipPathOwner.getAttribute('clip-path') !== obj.clipPath) {
         clipPathOwner = clipPathOwner.parentElement;
       }
       clipPathOwner.parentElement!.appendChild(clipPathTag!);
