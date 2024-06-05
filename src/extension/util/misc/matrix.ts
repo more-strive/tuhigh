@@ -135,3 +135,21 @@ export const multiplyTransformMatrixArray = (
       curr ? multiplyTransformMatrices(curr, product, is2x2) : product,
     iMatrix
   );
+
+  export const calcDimensionsMatrix = ({
+    scaleX = 1,
+    scaleY = 1,
+    flipX = false,
+    flipY = false,
+    skewX = 0 as TDegree,
+    skewY = 0 as TDegree,
+  }: TScaleMatrixArgs) => {
+    return multiplyTransformMatrixArray(
+      [
+        createScaleMatrix(flipX ? -scaleX : scaleX, flipY ? -scaleY : scaleY),
+        skewX && createSkewXMatrix(skewX),
+        skewY && createSkewYMatrix(skewY),
+      ],
+      true
+    );
+  };

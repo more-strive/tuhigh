@@ -3,6 +3,7 @@ import {
   multiplyTransformMatrices,
   qrDecompose,
 } from '../util/misc/matrix';
+import { Point } from '../point/Point';
 import { removeTransformMatrixForSvgParsing } from '../util/transform_matrix_removal';
 import { CENTER } from '../constants';
 import { getGradientDefs } from './getGradientDefs';
@@ -18,6 +19,8 @@ import { Image } from 'fabric/*';
 import { CanvasTypes } from '@/enums'
 import useCanvas from '@/logic/Canvas/useCanvas';
 import useCanvasScale from '@/hooks/useCanvasScale';
+import { sizeAfterTransform } from '../util/misc/objectTransforms';
+import { calcDimensionsMatrix } from '../util/misc/matrix'
 
 
 
@@ -79,6 +82,38 @@ export class ElementsParser {
     );
   }
 
+  _getTransformedDimensions(options: any = {}): Point {
+    const dimOptions = {
+      scaleX: this.scaleX,
+      scaleY: this.scaleY,
+      skewX: this.skewX,
+      skewY: this.skewY,
+      width: this.width,
+      height: this.height,
+      strokeWidth: this.strokeWidth,
+      ...options,
+    };
+    // stroke is applied before/after transformations are applied according to `strokeUniform`
+    const strokeWidth = dimOptions.strokeWidth;
+    let preScalingStrokeValue = strokeWidth, postScalingStrokeValue = 0;
+
+    if (this.strokeUniform) {
+      preScalingStrokeValue = 0;
+      postScalingStrokeValue = strokeWidth;
+    }
+    const dimX = dimOptions.width + preScalingStrokeValue,
+      dimY = dimOptions.height + preScalingStrokeValue,
+      noSkew = dimOptions.skewX === 0 && dimOptions.skewY === 0;
+    let finalDimensions;
+    if (noSkew) {
+      finalDimensions = new Point(dimX * dimOptions.scaleX, dimY * dimOptions.scaleY);
+    } else {
+      finalDimensions = sizeAfterTransform(dimX, dimY, calcDimensionsMatrix(dimOptions));
+    }
+
+    return finalDimensions.scalarAdd(postScalingStrokeValue);
+  }
+
   setLeaferSize() {
     console.log(this.options)
     const { setCanvasTransform } = useCanvasScale()
@@ -100,6 +135,8 @@ export class ElementsParser {
     const textContent = (el.textContent || '').replace(/^\s+|\s+$|\n+/g, '').replace(/\s+/g, ' ');
     // console.log('tag:', tag, 'attributes:', attributes)
     if (tag === 'text') {
+      console.log('tag:', tag, 'attributes:', attributes)
+      
       const text = new Text({
         id: nanoid(10),
         // width: attributes.width,
