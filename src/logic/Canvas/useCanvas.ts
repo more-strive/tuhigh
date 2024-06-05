@@ -16,6 +16,7 @@ import useCommon from './useCommon'
 import useHammer from './useHammer'
 import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
+import '@leafer-in/view'
 
 let app: null | App = null
 
@@ -34,13 +35,16 @@ const setCanvasTransform = () => {
   const { wrapperRef, zoom, scalePercentage } = storeToRefs(leaferStore)
   const { width, height } = useElementBounding(wrapperRef.value)
   const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
-  if (!width || !height) return
+  if (!width.value || !height.value) return
   if (!workspace.width || !workspace.height) return
-  zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
+  // app.tree.zoom(workspace, 0, true)
+  app.tree.zoom('fit', 100) 
+  console.log('app:', app.width, app.height)
+  // zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
   
-  workspace.scale = zoom.value;
-  workspace.x = (width.value - workspace.width * zoom.value) / 2;
-  workspace.y = (height.value - workspace.height * zoom.value) / 2;
+  // workspace.scale = zoom.value;
+  // workspace.x = (width.value - workspace.width * zoom.value) / 2;
+  // workspace.y = (height.value - workspace.height * zoom.value) / 2;
 }
 
 const initCanvas = () => {
@@ -49,8 +53,7 @@ const initCanvas = () => {
   if (!canvasRef.value) return
   if (!wrapperRef.value) return
   app = new App({ 
-    view: canvasRef.value,
-    
+    view: canvasRef.value
   })
   app.tree = app.addLeafer()
   app.sky = app.addLeafer({ type: 'draw', usePartRender: false })
