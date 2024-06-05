@@ -24,12 +24,6 @@ const initConf = () => {
   Text.setEditConfig({
     editSize: 'size' // 使用对象
   })
-
-  // Text.setEditConfig(function (text: Text) {
-  //   return {  // 使用函数返回对象，可增加业务逻辑分流
-  //     editSize: text.get('width') ? 'size' : 'scale'
-  //   }
-  // })
   
 }
 
@@ -37,15 +31,16 @@ const initConf = () => {
 const setCanvasTransform = () => {
   if (!app) return
   const leaferStore = useLeaferStore()
-  const { wrapperRef } = storeToRefs(leaferStore)
+  const { wrapperRef, zoom, scalePercentage } = storeToRefs(leaferStore)
   const { width, height } = useElementBounding(wrapperRef.value)
-  // const background = app.ground.findOne('#background')
   const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
-  // background.set({width: width.value, height: height.value})
-  if (!workspace.width) return
-  if (!workspace.height) return
-  workspace.set({x: width.value / 2 - workspace.width / 2, y: height.value / 2 - workspace.height / 2})
-  // console.log(background)
+  if (!width || !height) return
+  if (!workspace.width || !workspace.height) return
+  zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
+  
+  workspace.scale = zoom.value;
+  workspace.x = (width.value - workspace.width * zoom.value) / 2;
+  workspace.y = (height.value - workspace.height * zoom.value) / 2;
 }
 
 const initCanvas = () => {

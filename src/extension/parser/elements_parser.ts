@@ -78,13 +78,14 @@ export class ElementsParser {
   async createObject(el: Element): Promise<any | null> {
     // const klass = findTag(el) as Path | Text;
     let leaferClass = undefined
+    console.log(this.options)
     const tag = el.tagName.toLowerCase().replace('svg:', '')
     if (tag === 'text') leaferClass = Text
     else if (tag === 'path') leaferClass = Path
     const attributes = parseAttributes(el as HTMLElement, ATTRIBUTE_NAMES, this.cssRules)
     const [ canvas ] = useCanvas()
     const textContent = (el.textContent || '').replace(/^\s+|\s+$|\n+/g, '').replace(/\s+/g, ' ');
-    console.log('tag:', tag, 'attributes:', attributes)
+    // console.log('tag:', tag, 'attributes:', attributes)
     if (tag === 'text') {
       const text = new Text({
         id: nanoid(10),
