@@ -1,14 +1,16 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useFabricStore, useTemplatesStore } from '@/store'
+import { useFabricStore, useLeaferStore, useTemplatesStore } from '@/store'
 import { useElementBounding } from '@vueuse/core'
 import { Group, Point } from 'fabric'
 import useCanvas from '@/logic/Canvas/useCanvas'
 import useCenter from '@/logic/Canvas/useCenter'
+import { CanvasTypes } from '@/enums'
 import { WorkSpaceThumbType } from '@/configs/canvas'
 
 export default () => {
   const fabricStore = useFabricStore()
+  const leaferStore = useLeaferStore()
   const { zoom, wrapperRef, scalePercentage } = storeToRefs(fabricStore)
   const canvasScalePercentage = computed(() => Math.round(zoom.value * 100) + '%')
 
@@ -73,16 +75,17 @@ export default () => {
 
   // 更新视图区长宽
   const setCanvasTransform = () => {
-    const [ canvas ] = useCanvas()
-    if (!canvas) return
-    const { zoom } = storeToRefs(fabricStore)
-    const objects = canvas.getObjects().filter(ele => !WorkSpaceThumbType.includes(ele.id))
-    const boundingBox = Group.prototype.getObjectsBoundingBox(objects)
-    const { width, height, centerPoint } = useCenter()
-    if (!boundingBox) return
-    zoom.value = Math.min(canvas.getWidth() / width, canvas.getHeight() / height) * scalePercentage.value / 100
-    canvas.setZoom(zoom.value)
-    canvas.absolutePan(new Point(centerPoint.x, centerPoint.y).scalarMultiply(zoom.value).subtract(canvas.getCenterPoint()))
+    const [ app ] = useCanvas()
+    const leaferStore = useLeaferStore()
+    const { wrapperRef, zoom, scalePercentage } = storeToRefs(leaferStore)
+    const { width, height } = useElementBounding(wrapperRef.value)
+    const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    if (!width || !height) return
+    if (!workspace.width || !workspace.height) return
+    zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
+    workspace.scale = zoom.value;
+    workspace.x = (width.value - workspace.width * zoom.value) / 2;
+    workspace.y = (height.value - workspace.height * zoom.value) / 2;
   }
 
   /**

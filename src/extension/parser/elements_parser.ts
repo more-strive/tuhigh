@@ -17,6 +17,9 @@ import { ATTRIBUTE_NAMES } from './constants'
 import { Image } from 'fabric/*';
 import { CanvasTypes } from '@/enums'
 import useCanvas from '@/logic/Canvas/useCanvas';
+import useCanvasScale from '@/hooks/useCanvasScale';
+
+
 
 const findTag = (el: Element) => {
   const tag = el.tagName.toLowerCase().replace('svg:', '')
@@ -70,48 +73,58 @@ export class ElementsParser {
   }
 
   parse(): Promise<Array<any | null>> {
+    this.setLeaferSize()
     return Promise.all(
       this.elements.map((element) => this.createObject(element))
     );
   }
 
+  setLeaferSize() {
+    console.log(this.options)
+    const { setCanvasTransform } = useCanvasScale()
+    const [ canvas ] = useCanvas()
+    const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    workspace.set({width: this.options.width, height: this.options.height})
+    setCanvasTransform()
+  }
+
   async createObject(el: Element): Promise<any | null> {
     // const klass = findTag(el) as Path | Text;
     let leaferClass = undefined
-    console.log(this.options)
-    const tag = el.tagName.toLowerCase().replace('svg:', '')
-    if (tag === 'text') leaferClass = Text
-    else if (tag === 'path') leaferClass = Path
-    const attributes = parseAttributes(el as HTMLElement, ATTRIBUTE_NAMES, this.cssRules)
     const [ canvas ] = useCanvas()
+    const tag = el.tagName.toLowerCase().replace('svg:', '')
+    // if (tag === 'text') leaferClass = Text
+    // else if (tag === 'path') leaferClass = Path
+    const attributes = parseAttributes(el as HTMLElement, ATTRIBUTE_NAMES, this.cssRules)
+    
     const textContent = (el.textContent || '').replace(/^\s+|\s+$|\n+/g, '').replace(/\s+/g, ' ');
     // console.log('tag:', tag, 'attributes:', attributes)
     if (tag === 'text') {
       const text = new Text({
         id: nanoid(10),
-        width: attributes.width,
-        height: attributes.height,
-        text: attributes.text,
-        x: attributes.dx + attributes.transformMatrix[4],
-        y: attributes.dy + attributes.transformMatrix[5],
+        // width: attributes.width,
+        // height: attributes.height,
+        text: textContent,
+        x: attributes.transformMatrix[4] + attributes.dx,
+        y: attributes.transformMatrix[5] + attributes.dy,
         scaleX: attributes.transformMatrix[0],
         scaleY: attributes.transformMatrix[3],
         editable: true,
         fontSize: attributes.fontSize,
         fontFamily: attributes.fontFamily,
       })
-      // canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
+      canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
     }
     else if (tag === 'path') {
-      const text = new Path({
+      const path = new Path({
         id: nanoid(10),
         width: attributes.width,
         height: attributes.height,
         path: attributes.d,
-        x: attributes.transformMatrix[4],
-        y: attributes.transformMatrix[5],
+        x: 0,
+        y: 0,
       })
-      canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(text)
+      canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(path)
     }
     // const obj = new leaferClass({
     //   id: nanoid(10),
