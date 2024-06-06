@@ -37,14 +37,8 @@ const setCanvasTransform = () => {
   const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
   if (!width.value || !height.value) return
   if (!workspace.width || !workspace.height) return
-  // app.tree.zoom(workspace, 0, true)
-  app.tree.zoom('fit', 100) 
-  console.log('app:', app.width, app.height)
-  // zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
-  
-  // workspace.scale = zoom.value;
-  // workspace.x = (width.value - workspace.width * zoom.value) / 2;
-  // workspace.y = (height.value - workspace.height * zoom.value) / 2;
+  app.tree.zoom('fit', height.value / 10)
+  zoom.value = app.tree.scale as number
 }
 
 const initCanvas = () => {

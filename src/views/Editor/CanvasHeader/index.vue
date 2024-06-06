@@ -69,7 +69,7 @@ import { ref, computed } from "vue";
 import { ElementNames } from "@/types/elements";
 import { storeToRefs } from "pinia";
 import { Object as FabricObject, Group } from "fabric";
-import { useFabricStore, useMainStore, useSnapshotStore, useTemplatesStore } from "@/store";
+import { useFabricStore, useLeaferStore, useMainStore, useSnapshotStore, useTemplatesStore } from "@/store";
 import useI18n from "@/hooks/useI18n";
 import useCanvas from "@/logic/Canvas/useCanvas";
 import useHandleTool from "@/hooks/useHandleTool";
@@ -77,14 +77,14 @@ import useCanvasScale from "@/hooks/useCanvasScale";
 import useHandleElement from "@/hooks/useHandleElement";
 import useHistorySnapshot from "@/hooks/useHistorySnapshot";
 
-const fabricStore = useFabricStore();
+const leaferStore = useLeaferStore()
 const mainStore = useMainStore();
 const templatesStore = useTemplatesStore();
 const { t } = useI18n();
 const { alignElement, layerElement } = useHandleTool();
 const { setCanvasScalePercentage, scaleCanvas, resetCanvas } = useCanvasScale();
 const { combineElements, uncombineElements, intersectElements } = useHandleElement();
-const { zoom } = storeToRefs(fabricStore);
+const { zoom } = storeToRefs(leaferStore);
 const { canvasObject } = storeToRefs(mainStore);
 
 const scaleRef = ref();

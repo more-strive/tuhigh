@@ -82,10 +82,11 @@ export default () => {
     const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
     if (!width || !height) return
     if (!workspace.width || !workspace.height) return
-    zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
-    workspace.scale = zoom.value;
-    workspace.x = (width.value - workspace.width * zoom.value) / 2;
-    workspace.y = (height.value - workspace.height * zoom.value) / 2;
+    // zoom.value = Math.min(width.value / workspace.width, height.value / workspace.height) * scalePercentage.value / 100
+    // workspace.scale = zoom.value;
+    // workspace.x = (width.value - workspace.width * zoom.value) / 2;
+    // workspace.y = (height.value - workspace.height * zoom.value) / 2;
+    app.tree.zoom('fit', height.value / 10) 
   }
 
   /**
