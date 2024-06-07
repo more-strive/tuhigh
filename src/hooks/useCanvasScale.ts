@@ -11,7 +11,7 @@ import { WorkSpaceThumbType } from '@/configs/canvas'
 export default () => {
   const fabricStore = useFabricStore()
   const leaferStore = useLeaferStore()
-  const { zoom, wrapperRef, scalePercentage } = storeToRefs(fabricStore)
+  const { zoom, wrapperRef, scalePercentage } = storeToRefs(leaferStore)
   const canvasScalePercentage = computed(() => Math.round(zoom.value * 100) + '%')
 
   /**
@@ -24,11 +24,15 @@ export default () => {
     const step = 5
     const max = 500
     const min = 10
-    if (command === '+' && percentage <= max) percentage += step
-    if (command === '-' && percentage >= min) percentage -= step
-    const { centerPoint } = useCenter()
-    canvas.zoomToPoint(centerPoint, percentage / 100)
-    zoom.value = canvas.getZoom()
+    if (command === '+' && percentage <= max) {
+      canvas.tree.zoom('in', 0, true)
+      percentage += step
+    }
+    if (command === '-' && percentage >= min) {
+      canvas.tree.zoom('out', 0, true)
+      percentage -= step
+    }
+    zoom.value = canvas.tree.scale as number
   }
 
   /**

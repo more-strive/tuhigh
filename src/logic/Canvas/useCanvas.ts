@@ -17,6 +17,8 @@ import useHammer from './useHammer'
 import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
 import '@leafer-in/view'
+import '@leafer-in/editor'  
+import '@leafer-in/text-editor'
 
 let app: null | App = null
 
@@ -47,7 +49,8 @@ const initCanvas = () => {
   if (!canvasRef.value) return
   if (!wrapperRef.value) return
   app = new App({ 
-    view: canvasRef.value
+    view: canvasRef.value,
+    editor: {}
   })
   app.tree = app.addLeafer()
   app.sky = app.addLeafer({ type: 'draw', usePartRender: false })
