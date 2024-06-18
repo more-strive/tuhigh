@@ -40,12 +40,12 @@ const thumbnailTemplate = ref()
 const thumbCanvas = ref<StaticCanvas | undefined>(undefined)
 
 onMounted(() => {
-  thumbCanvas.value = new StaticCanvas(thumbnailTemplate.value, {
-    width: props.size,
-    height: props.size * viewportRatio.value,
-    backgroundColor: props.template.workSpace.fillType === 0 ? props.template.workSpace.fill as string : '#fff'
-  })
-  setThumbnailElement()
+  // thumbCanvas.value = new StaticCanvas(thumbnailTemplate.value, {
+  //   width: props.size,
+  //   height: props.size * viewportRatio.value,
+  //   backgroundColor: props.template.workSpace.fillType === 0 ? props.template.workSpace.fill as string : '#fff'
+  // })
+  // setThumbnailElement()
 })
 
 watch(props, () => {

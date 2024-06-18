@@ -39,7 +39,7 @@ import CanvasTour from "./CanvasTour/index.vue";
   height: calc(100% - 40px);
 }
 .layout-content-center {
-  width: calc(100% - 50px - 160px - 260px);
+  width: calc(100% - 50px - 160px);
 
   .center-header {
     border-left: 1px solid $borderColor;

@@ -101,9 +101,9 @@ export class ElementsParser {
       preScalingStrokeValue = 0;
       postScalingStrokeValue = strokeWidth;
     }
-    const dimX = dimOptions.width + preScalingStrokeValue,
-      dimY = dimOptions.height + preScalingStrokeValue,
-      noSkew = dimOptions.skewX === 0 && dimOptions.skewY === 0;
+    const dimX = dimOptions.width + preScalingStrokeValue
+    const dimY = dimOptions.height + preScalingStrokeValue
+    const noSkew = dimOptions.skewX === 0 && dimOptions.skewY === 0;
     let finalDimensions;
     if (noSkew) {
       finalDimensions = new Point(dimX * dimOptions.scaleX, dimY * dimOptions.scaleY);
