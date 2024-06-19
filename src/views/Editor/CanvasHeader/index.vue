@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="left-handler">
+      <el-button text ref="menuRef">文件</el-button>
+      <HomePopover :menu-ref="menuRef" :menu-popover-ref="menuPopoverRef" />
       <el-tooltip placement="top" :hide-after="0">
         <template #content>{{ t("message.undo") }}</template>
         <IconBack class="handler-item" :class="{ disable: !canUndo }" @click="undo()" />
@@ -68,7 +70,7 @@ import Lang from "@/components/Lang/index.vue";
 import { ref, computed } from "vue";
 import { ElementNames } from "@/types/elements";
 import { storeToRefs } from "pinia";
-import { Object as FabricObject, Group } from "fabric";
+import { FabricObject, Group } from "fabric";
 import { useFabricStore, useLeaferStore, useMainStore, useSnapshotStore, useTemplatesStore } from "@/store";
 import useI18n from "@/hooks/useI18n";
 import useCanvas from "@/logic/Canvas/useCanvas";
@@ -88,6 +90,8 @@ const { zoom } = storeToRefs(leaferStore);
 const { canvasObject } = storeToRefs(mainStore);
 
 const scaleRef = ref();
+const menuRef = ref();
+const menuPopoverRef = ref();
 const canvasZoom = computed(() => Math.round(zoom.value * 100) + "%");
 const canvasZoomPresets = [200, 150, 100, 80, 50];
 

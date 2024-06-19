@@ -1,10 +1,4 @@
-/*
- * @Author: June
- * @Description: 
- * @Date: 2024-05-25 20:03:23
- * @LastEditors: June
- * @LastEditTime: 2024-05-25 23:20:28
- */
+
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Leafer, App, Rect, Frame, Text, defineKey } from 'leafer-ui'
@@ -58,7 +52,7 @@ const initCanvas = () => {
   app.editor = new Editor()
   app.sky.add(app.editor)
 
-  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 1800, height: 1600, fill: '#fff', draggable: false })
+  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 1000, height: 618, fill: '#fff', draggable: false })
   app.tree.add(frame)
 }
 

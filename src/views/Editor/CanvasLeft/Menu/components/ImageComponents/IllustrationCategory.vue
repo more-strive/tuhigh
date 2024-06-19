@@ -176,22 +176,6 @@ const hideLoading = async (item: ImageHit, loading: Image) => {
 }
 
 const createImage = async (item: ImageHit) => {
-  const [ canvas ] = useCanvas()
-  const { centerPoint } = useCenter()
-  let loading = canvas.loading
-  if (!loading) {
-    loading = await GifImage.fromURL(new URL(`/src/assets/images/loading.gif`, import.meta.url).href)
-    loading.set({left: centerPoint.x - loading.width / 2, top: centerPoint.y - loading.height / 2})
-    canvas.add(loading);
-    canvas.renderAll()
-    canvas.loading = loading
-  }
-  else {
-    loading.set({visible: true})
-    canvas.bringObjectToFront(loading)
-    canvas.renderAll()
-  }
-  await hideLoading(item, loading)
   createImageElement(item.largeImageURL);
 };
 

@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { useFabricStore, useTemplatesStore } from "@/store";
+import { useFabricStore, useLeaferStore, useTemplatesStore } from "@/store";
 import { useMainStore } from "@/store/modules/main";
 import { RightStates, ElementNames } from "@/types/elements";
 import { nanoid } from "nanoid";
@@ -8,12 +8,11 @@ import { getImageSize } from "@/utils/image";
 import { Object as FabricObject, classRegistry, XY, util, Image as FabricImage } from "fabric";
 
 import { LinePoint } from "@/types/elements";
-import { Image } from "@/extension/object/Image";
 import { QRCode } from "@/extension/object/QRCode";
 import { BarCode } from "@/extension/object/BarCode";
 import { ArcText } from '@/extension/object/ArcText';
 import { VerticalText } from '@/extension/object/VerticalText'
-import { Text, Path } from 'leafer-ui'
+import { Text, Path, Line, Image } from 'leafer-ui'
 import JsBarcode from "jsbarcode";
 import { i18nObj } from "@/plugins/i18n/index"
 import useCenter from "@/logic/Canvas/useCenter";
@@ -147,61 +146,29 @@ export default () => {
   };
 
   const createLineElement = (path: XY[], startStyle: LinePoint, endStyle: LinePoint, strokeDashArray?: [number, number]) => {
-    // const { centerPoint } = useCenter()
-    // const lineElement = new Line([0, 0, 300, 0], {
-    //   id: nanoid(10),
-    //   left: centerPoint.x,
-    //   top: centerPoint.y,
-    //   strokeWidth: 4,
-    //   stroke: 'green',
-    //   scaleX: 1,
-    //   scaleY: 1,
-    //   originX: 'left',
-    //   originY: 'top',
-    //   transparentCorners: false,
-    // })
-    // renderCanvas(lineElement)
-    // canvas.add(lineElement)
-    // canvas.setActiveObject(lineElement)
-    // rightState.value = RightStates.ELEMENT_STYLE
-    // templatesStore.modifedElement()
-    // setZindex(canvas)
-    createPolylineElement(path, startStyle, endStyle, strokeDashArray);
-    // createArrowElement(path)
+    const { centerPoint } = useCenter();
+    const lineElement = new Line({  
+      x: centerPoint.x,
+      y: centerPoint.y,
+      width: 100,
+      strokeWidth: 5,
+      stroke: "#ff5e17",
+      editable: true
+    })
+    lineElement.x = centerPoint.x - lineElement.width;
+    lineElement.y = centerPoint.y - lineElement.height;
+    renderCanvas(lineElement);
   };
 
   const createPolylineElement = (path: XY[], startStyle: LinePoint, endStyle: LinePoint, strokeDashArray?: [number, number]) => {
-    const { centerPoint } = useCenter();
-    // const points = [ { x: 0, y: 0 }, { x: 200, y: 0 } ]
-    const Polyline = classRegistry.getClass("Polyline");
-
-    const element = new Polyline(path, {
-      id: nanoid(10),
-      left: centerPoint.x,
-      top: centerPoint.y,
-      strokeWidth: 4,
-      stroke: "pink",
-      fill: "",
-      scaleX: 1,
-      scaleY: 1,
-      originX: "left",
-      originY: "top",
-      startStyle,
-      endStyle,
-      hasBorders: false,
-      objectCaching: false,
-      transparentCorners: false,
-      strokeDashArray,
-      name: ElementNames.LINE,
-    });
-    renderCanvas(element);
+   
+    
   };
 
   const createImageElement = (url: string) => {
-    const { zoom } = storeToRefs(useFabricStore());
+    const { zoom } = storeToRefs(useLeaferStore());
     const { currentTemplateWidth, currentTemplateHeight } = storeToRefs(useTemplatesStore());
     const { centerPoint } = useCenter();
-    const [canvas] = useCanvas();
     getImageSize(url).then(async ({ width, height }) => {
       const scale = height / width;
       let imageScale = 1;
@@ -210,22 +177,14 @@ export default () => {
       } else if (height > currentTemplateHeight.value) {
         imageScale = currentTemplateHeight.value / height;
       }
-      const imageElement = await Image.fromURL(url, {}, {
-        id: nanoid(10),
-        angle: 0,
-        left: centerPoint.x - (width * imageScale) / 2,
-        top: centerPoint.y - (height * imageScale) / 2,
-        scaleX: imageScale,
-        scaleY: imageScale,
-        hasControls: true,
-        hasBorders: true,
-        opacity: 1,
-        originX: "left",
-        originY: "top",
-        borderColor: "#ff8d23",
-        name: ElementNames.IMAGE,
-        crossOrigin: "anonymous",
-      });
+      const imageElement = new Image({  
+        url,
+        x: centerPoint.x,
+        y: centerPoint.y,
+        scale: imageScale,
+        draggable: true,
+        editable: true
+      })
       renderCanvas(imageElement);
     });
   };
