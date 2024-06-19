@@ -2,7 +2,7 @@ import { storeToRefs } from 'pinia'
 import { useFabricStore } from '@/store'
 import { Directive, createVNode, render, DirectiveBinding } from 'vue'
 import useHandleElement from '@/hooks/useHandleElement'
-import ContextmenuComponent from '@/components/Contextmenu/index.vue'
+import ContextmenuComponent from '@/components/ContextMenu/index.vue'
 
 const checkElementClick = () => {
   const { elementHover } = storeToRefs(useFabricStore())
