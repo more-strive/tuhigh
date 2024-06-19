@@ -12,6 +12,8 @@ import useCenter from '@/logic/Canvas/useCenter'
 import { exportFile } from '@/api/file'
 import { Base64 } from 'js-base64'
 import { ElementNames } from '@/types/elements'
+import { CanvasTypes } from '@/enums'
+import { toDataURL } from '../extension/util/misc/dom';
 
 export default () => {
   
@@ -19,88 +21,37 @@ export default () => {
   const { showClip, showSafe } = storeToRefs(useFabricStore())
   const { currentTemplate } = storeToRefs(useTemplatesStore())
   // 导出图片
-  const exportImage = (format: ImageFormat, quality: number, dpi: number, ignoreClip = true) => {
+  const exportImage = async (format: ImageFormat, quality: number, dpi: number, ignoreClip = true) => {
     Exporting.value = true
     const [ canvas ] = useCanvas()
-    const { left, top, width, height } = useCenter()
-    const zoom = canvas.getZoom()
-    const viewportTransform = canvas.viewportTransform
-    const activeObject = canvas.getActiveObject()
-    let ignoreObjects = canvas.getObjects().filter(obj => WorkSpaceCommonType.includes(obj.id))
-    if (format === 'jpeg') {
-      ignoreObjects = canvas.getObjects().filter(obj => WorkSpaceThumbType.includes(obj.id))
-    }
-    if (ignoreClip) {
-      ignoreObjects.map(item => item.set({visible: false}))
-      canvas.renderAll()
-    }
-    if (activeObject) canvas.discardActiveObject()
-    canvas.getObjects().filter(item => item.type === ElementNames.REFERENCELINE && item.visible === true).map(item => item.set({visible: false}))
-    canvas.set({background: 'rgba(255,255,255,0)'})
-    canvas.renderAll()
-    let result = canvas.toDataURL({
-      multiplier: 1 / zoom,
-      quality: quality,
-      format: format,
-      width: width * zoom,
-      height: height * zoom,
-      left: left * zoom + viewportTransform[4],
-      top: top * zoom + viewportTransform[5]
-    })
-    result = changeDpiDataUrl(result, dpi)
-    saveAs(result, `yft-design-${Date.now()}.${format}`)
+    const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    const exportData = await workspace.export(format)
+    console.log('exportData:', exportData)
+   
+    const result = changeDpiDataUrl(exportData.data, dpi)
+    saveAs(result, `tuhigh-${Date.now()}.${format}`)
     Exporting.value = false
-    ignoreObjects.map(item => item.set({visible: true}))
-    canvas.getObjects().filter(obj => obj.id === WorkSpaceClipType).map(item => item.set({visible: showClip.value}))
-    canvas.getObjects().filter(obj => obj.id === WorkSpaceSafeType).map(item => item.set({visible: showSafe.value}))
-    if (activeObject) canvas.setActiveObject(activeObject)
-    canvas.getObjects().filter(item => item.type === ElementNames.REFERENCELINE && item.visible === false).map(item => item.set({visible: true}))
-    canvas.renderAll()
   }
 
   const getSVGData = () => {
     const [ canvas ] = useCanvas()
-    const { left, top, width, height } = useCenter()
-    canvas.getObjects().filter(item => item.type === ElementNames.REFERENCELINE && item.visible === true).map(item => item.set({visible: false}))
-    canvas.renderAll()
-    const data = canvas.toSVG({
-      viewBox: {
-        x: left,
-        y: top,
-        width: width,
-        height: height,
-      },
-      width: width + 'px',
-      height: height + 'px'
-    }, (element) => element)
-    canvas.getObjects().filter(item => item.type === ElementNames.REFERENCELINE && item.visible === false).map(item => item.set({visible: true}))
-    canvas.renderAll()
-    return data
+    const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    const result = workspace.toJSON()
+    return result
   }
 
   const getJSONData = () => {
     const [ canvas ] = useCanvas()
-    const serializer = canvas.toObject(propertiesToInclude)
-    serializer.workSpace = currentTemplate.value.workSpace
-    serializer.zoom = currentTemplate.value.zoom
-    serializer.width = currentTemplate.value.width
-    serializer.height = currentTemplate.value.height
-    console.log(JSON.stringify(serializer));
-    
-    return serializer
+    const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    const result = workspace.toJSON()
+    return result
   }
 
   const exportSVG = () => {
     const [ canvas ] = useCanvas()
-    const ignoreObjects = canvas.getObjects().filter(obj => WorkSpaceThumbType.includes(obj.id))
-    ignoreObjects.map(item => item.set({visible: false}))
-    canvas.renderAll()
-    const data = getSVGData()
-    downloadSVGFile(data, `yft-design-${Date.now()}.svg`)
-    ignoreObjects.map(item => item.set({visible: true}))
-    canvas.getObjects().filter(obj => obj.id === WorkSpaceClipType).map(item => item.set({visible: showClip.value}))
-    canvas.getObjects().filter(obj => obj.id === WorkSpaceSafeType).map(item => item.set({visible: showSafe.value}))
-    canvas.renderAll()
+    const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+    // const result = workspace.toSVG()
+    // return result
   }
 
   // 导出PDF
