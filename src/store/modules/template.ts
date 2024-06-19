@@ -4,6 +4,7 @@ import { Template, CanvasElement, ImageElement, GroupElement, RectElement } from
 import { Object as FabricObject, SerializedImageProps, Image, Group } from 'fabric'
 import { WorkSpaceDrawType, propertiesToInclude } from '@/configs/canvas'
 import { useMainStore } from './main'
+import { IUIInputData } from '@leafer-ui/interface'
 import { ElementNames } from '@/types/elements'
 import { ElLoading } from 'element-plus'
 import { CanvasTypes } from '@/enums'
@@ -23,7 +24,7 @@ interface UpdateElementData {
 }
 
 export interface TemplatesState {
-  templates: Template[]
+  templates: IUIInputData[]
   templateIndex: number
 }
 
@@ -77,7 +78,7 @@ export const useTemplatesStore = defineStore('Templates', {
     modifedElement() {
       const [ canvas ] = useCanvas()
       const { addHistorySnapshot } = useHistorySnapshot()
-      const result = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).toJSON() as Template
+      const result = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).toJSON()
       this.templates[this.templateIndex] = result
       addHistorySnapshot()
     },
