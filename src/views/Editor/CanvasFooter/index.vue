@@ -66,18 +66,7 @@ const exportFile = () => {
 }
 
 const loadFile = (files: FileList) => {
-  const jsonFile = files[0]
-  if (!jsonFile) return
-  const reader = new FileReader()
-  const [ canvas ] = useCanvas()
-  reader.onload = event => {
-    const jsonContent = event.target?.result?.toString()
-    if (!jsonContent) return
-    const jsonData = JSON.parse(jsonContent)
-    canvas.setViewportTransform(jsonData.viewportTransform)
-    canvas.setZoom(jsonData.zoom)
-  }
-  reader.readAsText(jsonFile)
+  
 }
 
 </script>
