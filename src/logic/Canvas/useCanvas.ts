@@ -1,13 +1,9 @@
 
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect, Frame, Text, defineKey, UI } from 'leafer-ui'
+import { Leafer, App, Rect, Frame, Text, ChildEvent, UI, PropertyEvent } from 'leafer-ui'
 import { useElementBounding } from '@vueuse/core'
-import { isMobile } from '@/utils/common'
-import { FabricCanvas } from '@/app/fabricCanvas'
 import { useTemplatesStore, useLeaferStore } from '@/store'
-import useCommon from './useCommon'
-import useHammer from './useHammer'
 import { Editor } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
 import '@leafer-in/view'
@@ -57,7 +53,7 @@ const initCanvas = () => {
 }
 
 // 初始化模板
-const initTemplate = async () => {
+const initTemplate = () => {
   if (!app) return
   const templatesStore = useTemplatesStore()
   const { currentTemplate } = storeToRefs(templatesStore)
@@ -66,13 +62,29 @@ const initTemplate = async () => {
   setCanvasTransform()
 }
 
-export const initEditor = async () => {
+const initEvent = () => {
+  if (!app) return
+  const templatesStore = useTemplatesStore()
+  const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+  if (!workspace) return
+  workspace.on(ChildEvent.ADD, function (e: ChildEvent) { 
+    console.log('add:', e) // changed list
+    templatesStore.modifedElement()
+  })
+  workspace.on(PropertyEvent.CHANGE, (e: PropertyEvent) => { 
+    console.log('change:', e) // changed list
+    templatesStore.modifedElement()
+  })
+}
+
+export const initEditor = () => {
   const leaferStore = useLeaferStore()
   const { wrapperRef } = storeToRefs(leaferStore)
   
   initCanvas()
   initConf()
   initTemplate()
+  initEvent()
   const { width, height } = useElementBounding(wrapperRef.value)
   watch([width, height], () => {
     setCanvasTransform()

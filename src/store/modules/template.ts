@@ -6,6 +6,8 @@ import { WorkSpaceDrawType, propertiesToInclude } from '@/configs/canvas'
 import { useMainStore } from './main'
 import { ElementNames } from '@/types/elements'
 import { ElLoading } from 'element-plus'
+import { CanvasTypes } from '@/enums'
+import { UI } from 'leafer-ui'
 import useCanvasScale from '@/hooks/useCanvasScale'
 import useCanvas from '@/logic/Canvas/useCanvas'
 import useHistorySnapshot from '@/hooks/useHistorySnapshot'
@@ -43,12 +45,12 @@ export const useTemplatesStore = defineStore('Templates', {
 
     currentTemplateWidth(state) {
       const currentTemplate = state.templates[state.templateIndex]
-      return currentTemplate.width / currentTemplate.zoom
+      return currentTemplate.width
     },
 
     currentTemplateHeight(state) {
       const currentTemplate = state.templates[state.templateIndex]
-      return currentTemplate.height / currentTemplate.zoom
+      return currentTemplate.height
     },
 
     currentTemplateElement(state) {
@@ -62,33 +64,21 @@ export const useTemplatesStore = defineStore('Templates', {
   actions: {
     async renderTemplate() {
       const [ canvas ] = useCanvas()
-      const { initCommon } = useCommon()
-      const { setCanvasSize } = useCanvasScale()
-      await canvas.loadFromJSON(this.currentTemplate)
-      this.setObjectFilter(this.currentTemplate.objects as CanvasElement[])
-      setCanvasSize()
-      initCommon()
+      const frame = UI.one(this.currentTemplate)
+      canvas.tree.add(frame)
     },
 
     async renderElement() {
       const [ canvas ] = useCanvas()
-      const { initCommon } = useCommon()
-      const { setCanvasSize } = useCanvasScale()
-      const mainStore = useMainStore()
-      canvas.discardActiveObject()
-      mainStore.setCanvasObject(undefined)
-      await canvas.loadFromJSON(this.currentTemplate)
-      setCanvasSize()
-      initCommon()
+      const frame = UI.one(this.currentTemplate)
+      canvas.tree.add(frame)
     },
 
     modifedElement() {
       const [ canvas ] = useCanvas()
       const { addHistorySnapshot } = useHistorySnapshot()
-      const canvasTemplate = canvas.toObject(propertiesToInclude)
-      this.templates[this.templateIndex].objects = canvasTemplate.objects
-      this.templates[this.templateIndex].background = canvasTemplate.background
-      this.templates[this.templateIndex].backgroundImage = canvasTemplate.backgroundImage
+      const result = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).toJSON() as Template
+      this.templates[this.templateIndex] = result
       addHistorySnapshot()
     },
 

@@ -29,16 +29,14 @@ export interface GradientElement extends Gradient<'linear' | 'radial'> {
 
 
 export interface Template {
+  tag: string
+  fill: string
   id: string
-  version: string
-  workSpace: WorkSpaceElement
-  background?: string
-  backgroundImage?: SerializedImageProps
-  zoom: number
+  x: number
+  y: number
   width: number
   height: number
-  clip: number,
-  objects: SerializedObjectProps[]
+  children: any[]
 }
 
 export interface WorkSpaceElement {

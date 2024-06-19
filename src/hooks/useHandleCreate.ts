@@ -33,7 +33,7 @@ export default () => {
   const { rightState, systemFonts } = storeToRefs(mainStore);
 
   const renderCanvas = (element: any) => {
-    const [canvas] = useCanvas();
+    const [ canvas ] = useCanvas();
 	  // canvas.viewportCenterObject(element); 
     // canvas.add(element);
     // canvas.setActiveObject(element);
@@ -41,7 +41,7 @@ export default () => {
     // setZindex(canvas);
     // canvas.renderAll();
     canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).add(element)
-    // templatesStore.modifedElement();
+    templatesStore.modifedElement();
   };
 
   const createTextElement = (fontSize: number, textStyle = "transverse", textHollow = false, textValue = t("default.textValue")) => {
