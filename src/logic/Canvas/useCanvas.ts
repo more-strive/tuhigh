@@ -1,7 +1,7 @@
 
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect, Frame, Text, defineKey } from 'leafer-ui'
+import { Leafer, App, Rect, Frame, Text, defineKey, UI } from 'leafer-ui'
 import { useElementBounding } from '@vueuse/core'
 import { isMobile } from '@/utils/common'
 import { FabricCanvas } from '@/app/fabricCanvas'
@@ -52,30 +52,18 @@ const initCanvas = () => {
   app.editor = new Editor()
   app.sky.add(app.editor)
 
-  const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 1000, height: 618, fill: '#fff', draggable: false })
-  app.tree.add(frame)
-}
-
-const initEvent = () => {
-  if (!app) return
-  // const templatesStore = useTemplatesStore()
-  // canvas.on('object:modified', () => templatesStore.modifedElement())
+  // const frame = new Frame({ id: CanvasTypes.WorkSpaceDrawType, x: 100, y: 100, width: 1000, height: 618, fill: '#fff', draggable: false })
+  // app.tree.add(frame)
 }
 
 // 初始化模板
 const initTemplate = async () => {
   if (!app) return
-  // const templatesStore = useTemplatesStore()
-  // const { initCommon } = useCommon()
-  // const { initHammer } = useHammer()
-  // const { currentTemplate } = storeToRefs(templatesStore)
-  // await canvas.loadFromJSON(currentTemplate.value)
+  const templatesStore = useTemplatesStore()
+  const { currentTemplate } = storeToRefs(templatesStore)
+  const frame = UI.one(currentTemplate.value)
+  app.tree.add(frame)
   setCanvasTransform()
-  // initCommon()
-  // initEvent()
-  // if (isMobile()) {
-  //   initHammer()
-  // }
 }
 
 export const initEditor = async () => {

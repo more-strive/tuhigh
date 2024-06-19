@@ -81,7 +81,7 @@ export default () => {
   const exportJSON = () => {
     const serializer = getJSONData()
     const blob = new Blob([JSON.stringify(serializer)])
-    saveAs(blob, `yft-design-${Date.now()}.json`)
+    saveAs(blob, `tuhigh-${Date.now()}.json`)
   }
 
   return {
