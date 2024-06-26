@@ -63,12 +63,16 @@ export const useTemplatesStore = defineStore('Templates', {
     async renderTemplate() {
       const [ canvas ] = useCanvas()
       const frame = UI.one(this.currentTemplate)
+      const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+      canvas.tree.remove(workspace)
       canvas.tree.add(frame)
     },
 
     async renderElement() {
       const [ canvas ] = useCanvas()
       const frame = UI.one(this.currentTemplate)
+      const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+      canvas.tree.remove(workspace)
       canvas.tree.add(frame)
     },
 

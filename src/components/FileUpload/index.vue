@@ -128,37 +128,27 @@ const uploadHandle = async (option: any) => {
   if (res && res.data.code === 200) {
     const template = res.data.data
     if (!template) return
-    if (['pdf', 'ai'].includes(fileSuffix)) {
-      const parseTemplate: Template[] = []
-      const pdfTemplate = template as any[]
-      for (let i = 0; i < pdfTemplate.length; i++) {
-        const dataText = pdfTemplate[i]
-        const emptyTemplate = await generateSVGTemplate(dataText)
-        parseTemplate.push(emptyTemplate)
-      }
+    // if (['pdf', 'ai'].includes(fileSuffix)) {
+    //   const parseTemplate: Template[] = []
+    //   const pdfTemplate = template as any[]
+    //   for (let i = 0; i < pdfTemplate.length; i++) {
+    //     const dataText = pdfTemplate[i]
+    //     const emptyTemplate = await generateSVGTemplate(dataText)
+    //     parseTemplate.push(emptyTemplate)
+    //   }
       
-      await templatesStore.addTemplate(parseTemplate)
-      setCanvasTransform()
-      emit('close')
-      return
-    }
-    await templatesStore.addTemplate(template)
-    setCanvasTransform()
+    //   await templatesStore.addTemplate(parseTemplate)
+    //   setCanvasTransform()
+    //   emit('close')
+    //   return
+    // }
+    // await templatesStore.addTemplate(template)
+    console.log('template:', template)
+    templatesStore.setTemplates([template])
+    await templatesStore.renderTemplate()
+    // setCanvasTransform()
     emit('close')
   }
-}
-
-const setImageMask = (image: Image) => {
-  if (!image.mask) return
-  const [ pixi ] = usePixi()
-  pixi.postMessage({
-    id: image.id,
-    type: "mask", 
-    src: image.getSrc(),
-    mask: JSON.stringify(image.mask), 
-    width: image.width, 
-    height: image.height
-  });
 }
 
 const handleExceed: UploadProps['onExceed'] = (files: File[]) => {

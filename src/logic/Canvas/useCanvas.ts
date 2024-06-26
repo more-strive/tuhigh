@@ -1,7 +1,7 @@
 
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect, Frame, Text, ChildEvent, UI, PropertyEvent, LeafList, LayoutEvent, DragEvent } from 'leafer-ui';
+import { App, Text, ChildEvent, UI, DragEvent, RotateEvent } from 'leafer-ui';
 import { useElementBounding } from '@vueuse/core'
 import { useTemplatesStore, useLeaferStore } from '@/store'
 import { Editor, EditorMoveEvent, EditorEvent } from '@leafer-in/editor'
@@ -75,7 +75,7 @@ const initEvent = () => {
     console.log('ChildEvent.REMOVE:', e) // changed list
     templatesStore.modifedElement()
   })
-  app.tree.on(DragEvent.END, (e: DragEvent) => { 
+  app.tree.on([DragEvent.END, RotateEvent.END], (e: DragEvent | RotateEvent) => { 
     console.log('DragEvent.END', e)
     templatesStore.modifedElement()
   })
