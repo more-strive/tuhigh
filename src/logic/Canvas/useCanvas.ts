@@ -1,10 +1,10 @@
 
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Leafer, App, Rect, Frame, Text, ChildEvent, UI, PropertyEvent } from 'leafer-ui'
+import { Leafer, App, Rect, Frame, Text, ChildEvent, UI, PropertyEvent, LeafList, LayoutEvent, DragEvent } from 'leafer-ui';
 import { useElementBounding } from '@vueuse/core'
 import { useTemplatesStore, useLeaferStore } from '@/store'
-import { Editor } from '@leafer-in/editor'
+import { Editor, EditorMoveEvent, EditorEvent } from '@leafer-in/editor'
 import { CanvasTypes } from '@/enums'
 import '@leafer-in/view'
 import '@leafer-in/editor'  
@@ -68,11 +68,15 @@ const initEvent = () => {
   const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
   if (!workspace) return
   workspace.on(ChildEvent.ADD, function (e: ChildEvent) { 
-    console.log('add:', e) // changed list
+    console.log('ChildEvent.ADD:', e) // changed list
     templatesStore.modifedElement()
   })
-  workspace.on(PropertyEvent.CHANGE, (e: PropertyEvent) => { 
-    console.log('change:', e) // changed list
+  workspace.on(ChildEvent.REMOVE, function (e: ChildEvent) { 
+    console.log('ChildEvent.REMOVE:', e) // changed list
+    templatesStore.modifedElement()
+  })
+  app.tree.on(DragEvent.END, (e: DragEvent) => { 
+    console.log('DragEvent.END', e)
     templatesStore.modifedElement()
   })
 }

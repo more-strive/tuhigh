@@ -55,10 +55,7 @@ export const useTemplatesStore = defineStore('Templates', {
     },
 
     currentTemplateElement(state) {
-      const currentTemplate = state.templates[state.templateIndex]
-      const [ canvas ] = useCanvas()
-      const activeObject = canvas.getActiveObject() as CanvasElement
-      return currentTemplate.objects.filter(ele => ele.id === activeObject.id)[0]
+      
     }
   },
 
