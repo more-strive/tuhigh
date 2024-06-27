@@ -64,8 +64,9 @@ export default () => {
       //   value: 1,
       // }
     })
-    textElement.x = centerPoint.x - textElement.width;
-    textElement.y = centerPoint.y - textElement.height;
+    console.log('textElement.width:', textElement.width, textElement.height)
+    textElement.x = centerPoint.x - textElement.width / 2;
+    textElement.y = centerPoint.y - textElement.height / 2;
     renderCanvas(textElement)
   };
 

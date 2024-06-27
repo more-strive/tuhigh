@@ -1,15 +1,13 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { CanvasTypes } from '@/enums'
 import { useFabricStore, useLeaferStore, useTemplatesStore } from '@/store'
 import { useElementBounding } from '@vueuse/core'
-import { Group, Point } from 'fabric'
 import useCanvas from '@/logic/Canvas/useCanvas'
 import useCenter from '@/logic/Canvas/useCenter'
-import { CanvasTypes } from '@/enums'
-import { WorkSpaceThumbType } from '@/configs/canvas'
+
 
 export default () => {
-  const fabricStore = useFabricStore()
   const leaferStore = useLeaferStore()
   const { zoom, wrapperRef, scalePercentage } = storeToRefs(leaferStore)
   const canvasScalePercentage = computed(() => Math.round(zoom.value * 100) + '%')
@@ -42,9 +40,8 @@ export default () => {
    */
   const setCanvasScalePercentage = (value: number) => {
     const [ canvas ] = useCanvas()
-    const { centerPoint } = useCenter()
-    canvas.zoomToPoint(centerPoint, value / 100)
-    zoom.value = canvas.getZoom()
+    canvas.tree.zoom(value / 100)
+    zoom.value = canvas.tree.scale as number
   }
 
   const setWorkSpace = (width: number, height: number) => {

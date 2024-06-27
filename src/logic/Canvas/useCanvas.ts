@@ -1,7 +1,7 @@
 
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { App, Text, ChildEvent, UI, DragEvent, RotateEvent } from 'leafer-ui';
+import { App, Text, ChildEvent, UI, DragEvent, RotateEvent, ZoomEvent, PointerEvent } from 'leafer-ui';
 import { useElementBounding } from '@vueuse/core'
 import { useTemplatesStore, useLeaferStore } from '@/store'
 import { Editor, EditorMoveEvent, EditorEvent } from '@leafer-in/editor'
@@ -64,6 +64,8 @@ const initTemplate = () => {
 
 const initEvent = () => {
   if (!app) return
+  const leaferStore = useLeaferStore()
+  const { zoom } = storeToRefs(leaferStore)
   const templatesStore = useTemplatesStore()
   const workspace = app.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
   if (!workspace) return
@@ -78,6 +80,13 @@ const initEvent = () => {
   app.tree.on([DragEvent.END, RotateEvent.END], (e: DragEvent | RotateEvent) => { 
     console.log('DragEvent.END', e)
     templatesStore.modifedElement()
+  })
+  app.tree.on(ZoomEvent.ZOOM, (e: ZoomEvent) => {
+    if (!app) return
+    zoom.value = app.tree.scale as number
+  })
+  app.tree.on(PointerEvent.DOWN, (e: PointerEvent) => {
+    console.log(app?.editor.list)
   })
 }
 
