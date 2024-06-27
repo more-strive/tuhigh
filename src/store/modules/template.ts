@@ -79,7 +79,9 @@ export const useTemplatesStore = defineStore('Templates', {
     modifedElement() {
       const [ canvas ] = useCanvas()
       const { addHistorySnapshot } = useHistorySnapshot()
-      const result = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`).toJSON()
+      const workspace = canvas.tree.findOne(`#${CanvasTypes.WorkSpaceDrawType}`)
+      if (!workspace) return
+      const result = workspace.toJSON()
       this.templates[this.templateIndex] = result
       addHistorySnapshot()
     },
