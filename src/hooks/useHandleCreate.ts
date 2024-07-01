@@ -5,13 +5,12 @@ import { RightStates, ElementNames } from "@/types/elements";
 import { nanoid } from "nanoid";
 import { QRCodeElement, QRCodeOption } from "@/types/canvas";
 import { getImageSize } from "@/utils/image";
-import { Object as FabricObject, classRegistry, XY, util, Image as FabricImage } from "fabric";
 
 import { LinePoint } from "@/types/elements";
-import { QRCode } from "@/extension/object/QRCode";
-import { BarCode } from "@/extension/object/BarCode";
-import { ArcText } from '@/extension/object/ArcText';
-import { VerticalText } from '@/extension/object/VerticalText'
+// import { QRCode } from "@/extension/object/QRCode";
+// import { BarCode } from "@/extension/object/BarCode";
+// import { ArcText } from '@/extension/object/ArcText';
+// import { VerticalText } from '@/extension/object/VerticalText'
 import { Text, Path, Line, Image } from 'leafer-ui'
 import JsBarcode from "jsbarcode";
 import { i18nObj } from "@/plugins/i18n/index"

@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue'
-import { ReferenceLine } from '@/extension/object/ReferenceLine'
+// import { ReferenceLine } from '@/extension/object/ReferenceLine'
 import { useMainStore, useTemplatesStore } from '@/store'
 import useCanvas from '@/logic/Canvas/useCanvas'
 const hasReference = ref(false)
@@ -56,28 +56,28 @@ const setReference = (val: boolean) => {
 
 const addReference = () => {
   const [ canvas ] = useCanvas()
-  const ruler = canvas.ruler
-  if (!ruler) return
-  const tempReferenceLine = new ReferenceLine(
-    Number(distance.value),
-    {
-      type: 'ReferenceLine',
-      axis: direction.value,
-      visible: true,
-      name: 'ReferenceLine',
-      selectable: true,
-      hasControls: false,
-      hasBorders: false,
-      stroke: 'pink',
-      fill: 'pink',
-      originX: 'center',
-      originY: 'center',
-      padding: 4,
-      globalCompositeOperation: 'difference',
-    }
-  );
-  canvas.add(tempReferenceLine)
-  canvas.renderAll()
+  // const ruler = canvas.ruler
+  // if (!ruler) return
+  // const tempReferenceLine = new ReferenceLine(
+  //   Number(distance.value),
+  //   {
+  //     type: 'ReferenceLine',
+  //     axis: direction.value,
+  //     visible: true,
+  //     name: 'ReferenceLine',
+  //     selectable: true,
+  //     hasControls: false,
+  //     hasBorders: false,
+  //     stroke: 'pink',
+  //     fill: 'pink',
+  //     originX: 'center',
+  //     originY: 'center',
+  //     padding: 4,
+  //     globalCompositeOperation: 'difference',
+  //   }
+  // );
+  // canvas.add(tempReferenceLine)
+  // canvas.renderAll()
   const templatesStore = useTemplatesStore()
   templatesStore.modifedElement()
 }

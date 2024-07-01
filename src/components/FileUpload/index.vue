@@ -24,9 +24,7 @@ import { ElMessage, genFileId, UploadInstance, UploadProps, UploadRawFile } from
 import { uploadFile } from '@/api/file'
 import { useTemplatesStore } from '@/store'
 import { loadSVGFromString } from '@/extension/parser/loadSVGFromString'
-import { ElementNames } from '@/types/elements'
 import { WorkSpaceDrawData, propertiesToInclude } from '@/configs/canvas'
-import { Image, Object as FabricObject } from 'fabric'
 import { Template } from "@/types/canvas"
 import { nanoid } from 'nanoid'
 import useCanvasScale from '@/hooks/useCanvasScale'
@@ -70,7 +68,7 @@ const generateSVGTemplate = async (dataText: string) => {
   const content = await loadSVGFromString(dataText)
   const options = content.options
   const svgData: any[] = []
-  content.objects.slice(0, 1000).forEach(ele => svgData.push((ele as FabricObject).toObject(propertiesToInclude)))
+  content.objects.slice(0, 1000).forEach(ele => svgData.push(ele.toObject(propertiesToInclude)))
   WorkSpaceDrawData.width = options.width
   WorkSpaceDrawData.height = options.height
   const emptyTemplate: Template = {

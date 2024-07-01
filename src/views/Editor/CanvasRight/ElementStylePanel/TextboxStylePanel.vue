@@ -228,9 +228,6 @@ import { TextboxElement } from '@/types/canvas'
 import { ElementNames, FontGroupOption } from '@/types/elements'
 import { loadFont } from '@/utils/fonts'
 import { nanoid } from 'nanoid'
-import { ArcText } from '@/extension/object/ArcText'
-import { CurvedText } from '@/extension/object/CurvedText'
-import { VerticalText } from '@/extension/object/VerticalText'
 import opentype from "opentype.js"
 import ElementPosition from '../Components/ElementPosition.vue'
 import ElementStroke from '../Components/ElementStroke.vue'
@@ -508,8 +505,6 @@ const handleElementDeformation = () => {
   let text
   if (handleElement.value.type.toLowerCase() === ElementNames.ARCTEXT) {
     text = new IText(options.text, options)
-  } else {
-    text = new ArcText(options.text, options)
   }
   canvas.add(text)
   handleElement.value.set({visible: false})

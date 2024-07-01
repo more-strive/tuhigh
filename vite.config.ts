@@ -196,7 +196,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           // assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件像 字体，图片等
           manualChunks: {
             vue: ['vue'],
-            fabric: ['fabric'],
             'lodash-es': ['lodash-es'],
             'opentype.js': ['opentype.js'],
             'clipper-lib': ['clipper-lib'],

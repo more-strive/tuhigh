@@ -1,6 +1,5 @@
 import { ContextMenu } from '@/components/ContextMenu/types'
 import { ElementNames, AlignCommand, LayerCommand } from '@/types/elements'
-import { Object as FabricObject } from 'fabric'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
 import useHandleElement from '@/hooks/useHandleElement'
@@ -38,7 +37,7 @@ export const contextMenus = (): ContextMenu[] => {
   const { lockElement, deleteElement, cutElement, copyElement, pasteElement } = useHandleElement()
   const { alignElement, layerElement } = useHandleTool()
   const { canvasObject } = storeToRefs(useMainStore())
-  const element = canvasObject.value as FabricObject
+  const element = canvasObject.value
   if (!element) {
     return [
       {
