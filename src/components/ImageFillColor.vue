@@ -206,7 +206,7 @@ const download = () => {
   const canvas = document.getElementById('ImageFillColor'); // 替换为你的canvas元素的id
   downloadLinkFile(
     canvas.toDataURL('image/png'),
-    `yft-design-${Date.now()}-ImageFillColor.png`
+    `tuhigh-${Date.now()}-ImageFillColor.png`
   );
 };
 

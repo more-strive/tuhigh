@@ -73,7 +73,7 @@ export default () => {
     }
     const result = await exportFile(content)
     if (result && result.data.link) {
-      downloadLinkFile(result.data.link, `yft-design-${Date.now()}.${filetype}`)
+      downloadLinkFile(result.data.link, `tuhigh-${Date.now()}.${filetype}`)
     }
   }
 

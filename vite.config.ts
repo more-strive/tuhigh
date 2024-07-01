@@ -58,7 +58,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       // VitePWA({
       //   registerType: "autoUpdate",
       //   workbox: {
-      //     cacheId: "yft-design-cache",
+      //     cacheId: "tuhigh-cache",
       //     runtimeCaching: [
       //       {
       //         urlPattern: /.*/i,
@@ -84,8 +84,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       //     ],
       //   },
       //   manifest: {
-      //     name: "yft-design",
-      //     short_name: "yft-design",
+      //     name: "tuhigh",
+      //     short_name: "tuhigh",
       //     theme_color: "#d14424",
       //     icons: [
       //       {
@@ -126,7 +126,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         minify: true,
         inject: {
           data: {
-            title: 'yft-design'
+            title: 'tuhigh'
           }
         }
       })
