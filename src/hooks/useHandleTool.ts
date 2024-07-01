@@ -3,7 +3,6 @@ import useCenter from "@/logic/Canvas/useCenter"
 import useCanvasZindex from "./useCanvasZindex"
 import { AlignCommand, ElementNames, LayerCommand } from "@/types/elements"
 import { useTemplatesStore } from "@/store"
-import { Group } from "fabric"
 
 export default () => {
   

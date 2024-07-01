@@ -1,6 +1,5 @@
 import Hammer from 'hammerjs'
 import useCanvas from './useCanvas'
-import { Point, Object as FabricObject, util } from 'fabric'
 import { storeToRefs } from 'pinia'
 import { useFabricStore } from '@/store/modules/fabric'
 

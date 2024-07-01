@@ -322,7 +322,6 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
-import { filters, Image } from "fabric";
 import { ImageElement } from "@/types/canvas";
 import { ElementNames } from "@/types/elements";
 import { SharpenMatrix, EmbossMatrix, GrayscaleType } from "@/configs/images";

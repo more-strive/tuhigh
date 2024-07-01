@@ -28,7 +28,6 @@ import ElementStroke from '../Components/ElementStroke.vue'
 import ElementFill from '../Backgrounds/ElementFill.vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
-import { Path } from 'fabric'
 
 
 const mainStore = useMainStore()

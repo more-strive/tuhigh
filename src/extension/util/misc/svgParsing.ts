@@ -1,12 +1,5 @@
 
 import { DEFAULT_SVG_FONT_SIZE, NONE } from '../../constants';
-import type {
-  TBBox,
-  TMat2D,
-  SVGElementName,
-  SupportedSVGUnit,
-} from 'fabric';
-// import { config, Color } from 'fabric';
 import { config } from '@/extension/config';
 import { Color } from '@/extension/color/Color';
 import { toFixed } from './toFixed';

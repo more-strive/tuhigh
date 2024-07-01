@@ -15,7 +15,6 @@ import { nanoid } from 'nanoid';
 import { Path, Text } from 'leafer-ui';
 import { parseAttributes } from './parseAttributes'
 import { ATTRIBUTE_NAMES } from './constants'
-import { Image } from 'fabric/*';
 import { CanvasTypes } from '@/enums'
 import useCanvas from '@/logic/Canvas/useCanvas';
 import useCanvasScale from '@/hooks/useCanvasScale';

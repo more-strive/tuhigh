@@ -1,4 +1,4 @@
-import { Object as FabricObject, TPointerEventInfo, TPointerEvent } from "fabric"
+
 
 const getParentScaleX = (el: FabricObject): number => {
   return el.scaleX * (el.group ? getParentScaleX(el.group) : 1)

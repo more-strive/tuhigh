@@ -44,11 +44,9 @@ import { getIllustrationPages, getIllustrationCategory } from "@/api/static/imag
 import { ImageHit } from "@/api/static/types";
 import { useMainStore } from "@/store";
 import { storeToRefs } from "pinia";
-import { util } from "fabric";
 import { GifImage } from '@/extension/object/GifImage'
 import useHandleCreate from "@/hooks/useHandleCreate";
 import useCanvas from "@/logic/Canvas/useCanvas";
-import { Image } from "fabric";
 import useCenter from "@/logic/Canvas/useCenter";
 const mainStore = useMainStore();
 const { illustrationCategoryType, illustrationCategoryData } = storeToRefs(mainStore);

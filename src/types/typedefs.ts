@@ -1,5 +1,4 @@
 import { BaseFabricObject } from './EventTypeDefs'
-import type { Gradient, Pattern, Point, ImageFormat } from 'fabric'
 
 interface NominalTag<T> {
   nominalTag?: T;

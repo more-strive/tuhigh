@@ -9,7 +9,6 @@ import useCanvas from "./useCanvas"
 import { LeafList  } from 'leafer-ui'
 import { WorkSpaceDrawType, WorkSpaceThumbType } from "@/configs/canvas"
 import { CanvasElement } from "@/types/canvas"
-import { Group, Point } from "fabric"
 import { CanvasTypes } from '@/enums'
 
 export default () => {

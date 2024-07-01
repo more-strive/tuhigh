@@ -1,10 +1,6 @@
 import { noop } from '../../constants';
-import type { FabricObject } from 'fabric';
 import type { Abortable, TCrossOrigin, TFiller } from '../../typedefs';
 import { createImage } from './dom';
-// import { classRegistry, Pattern } from 'fabric';
-import type { filters } from 'fabric';
-import type { FabricObject as BaseFabricObject } from 'fabric';
 
 export type LoadImageOptions = Abortable & {
   /**

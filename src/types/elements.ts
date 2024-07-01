@@ -1,5 +1,4 @@
 import { ImageHit } from "@/api/static/types"
-import { XY } from "fabric"
 import { ImageElement } from "./canvas"
 
 export const enum ElementNames {

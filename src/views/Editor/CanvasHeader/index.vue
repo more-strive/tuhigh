@@ -70,7 +70,6 @@ import Lang from "@/components/Lang/index.vue";
 import { ref, computed } from "vue";
 import { ElementNames } from "@/types/elements";
 import { storeToRefs } from "pinia";
-import { FabricObject, Group } from "fabric";
 import { useFabricStore, useLeaferStore, useMainStore, useSnapshotStore, useTemplatesStore } from "@/store";
 import useI18n from "@/hooks/useI18n";
 import useCanvas from "@/logic/Canvas/useCanvas";

@@ -29,7 +29,6 @@
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
-import { util, Pattern } from 'fabric'
 import { TextboxElement, TPatternRepeat } from '@/types/canvas'
 import { PatternImages } from '@/configs/images'
 import useCanvas from '@/logic/Canvas/useCanvas'

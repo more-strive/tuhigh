@@ -2,7 +2,6 @@ import { containsPoint } from '@/utils/utility'
 import { CLIPPATHS, ClipPathType } from '@/configs/images'
 import { defaultControls } from '@/app/fabricControls'
 import { fireCropImageEvent } from '@/extension/controls/cropping/cropping.controls.handlers'
-import { config, Object as FabricObject, Path, util, Canvas, Point, TPointerEventInfo, TPointerEvent, Image, } from 'fabric'
 
 
 export function isolateObjectForEdit(context: FabricObject) {

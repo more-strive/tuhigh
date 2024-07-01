@@ -1,4 +1,4 @@
-// import { getFabricDocument } from 'fabric';
+
 import type { ImageFormat } from '../../typedefs';
 /**
  * Creates canvas element

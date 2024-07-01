@@ -1,7 +1,6 @@
 import { tryOnScopeDispose } from '@vueuse/shared'
 import { reactive, ref, computed } from 'vue'
 import { useCanvasEvent } from './useCanvasEvent'
-import type { TPointerEventInfo, TPointerEvent, Point } from 'fabric'
 
 
 class TouchEvent extends UIEvent {

@@ -1,4 +1,4 @@
-import * as fabric from 'fabric';
+
 import {
     cropFromTop,
     cropFromTopFlig,

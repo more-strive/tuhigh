@@ -1,5 +1,4 @@
 import { LinePoint } from '@/types/elements'
-import { XY } from 'fabric'
 
 
 export interface LinePoolItem {

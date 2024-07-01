@@ -1,6 +1,5 @@
 import type { Fn } from '@vueuse/shared'
 import { tryOnScopeDispose } from '@vueuse/shared'
-import { CanvasEvents, ObjectEvents } from 'fabric'
 import useCanvas from '@/logic/Canvas/useCanvas'
 
 type TEventCallback<T = any> = (options: T) => any

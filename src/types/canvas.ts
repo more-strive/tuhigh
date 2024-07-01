@@ -1,4 +1,3 @@
-import type { Gradient, Pattern, Textbox, SerializedImageProps, Path, Rect, Image, Point, Polygon, Group, Line, Object as FabricObject, ImageProps, IText, SerializedObjectProps } from "fabric"
 import { ColorStop } from "./elements"
 import JsBarcode from "jsbarcode"
 import { EffectItem } from "./common"

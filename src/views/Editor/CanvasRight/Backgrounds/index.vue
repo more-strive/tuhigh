@@ -503,7 +503,6 @@
 import { useMainStore, useTemplatesStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { debounce } from "lodash-es";
-import { Gradient, Pattern, Image, util } from "fabric";
 import {
   TransparentFill,
   BackgroundFillMode,

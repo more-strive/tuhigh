@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { Templates } from '@/mocks/templates'
 import { Template, CanvasElement, ImageElement, GroupElement, RectElement } from '@/types/canvas'
-import { Object as FabricObject, SerializedImageProps, Image, Group } from 'fabric'
 import { WorkSpaceDrawType, propertiesToInclude } from '@/configs/canvas'
 import { useMainStore } from './main'
 import { IUIInputData } from '@leafer-ui/interface'

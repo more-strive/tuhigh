@@ -83,7 +83,6 @@ import { ref, reactive } from 'vue'
 import { debounce } from 'lodash-es';
 import { WorkSpaceThumbType, WorkSpaceDrawType } from "@/configs/canvas"
 import { ElementNames } from "@/types/elements";
-import { Image } from 'fabric'
 import { nanoid } from "nanoid";
 import { ElMessage } from 'element-plus'
 

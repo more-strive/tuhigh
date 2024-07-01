@@ -42,7 +42,6 @@ import { PathShapeLibs } from '@/configs/shape'
 import { PathPoolItem } from '@/types/elements'
 import { useMainStore } from '@/store'
 import { storeToRefs } from 'pinia'
-import { Path } from 'fabric'
 import { PathElement } from '@/types/canvas'
 import useCanvas from '@/logic/Canvas/useCanvas'
 const mainStore = useMainStore()

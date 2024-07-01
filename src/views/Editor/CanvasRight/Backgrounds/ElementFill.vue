@@ -237,7 +237,6 @@ import { ref, computed, watch, onMounted, onActivated } from "vue";
 import { useMainStore, useTemplatesStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { debounce } from "lodash-es";
-import { Gradient, Pattern, util } from "fabric";
 import { TransparentFill, BackgroundFillMode, BackgroundFillImageMode, BackgroundFillGridMode, BackgroundFillGradientMode } from "@/configs/background";
 import { GridColorLibs } from "@/configs/colorGrid";
 import { GradientColorLibs } from "@/configs/colorGradient";

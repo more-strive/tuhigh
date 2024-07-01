@@ -1,4 +1,4 @@
-// import { getFabricWindow } from 'fabric';
+
 import { noop } from '../../constants';
 import type { Abortable } from '../../typedefs';
 

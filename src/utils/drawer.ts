@@ -1,4 +1,4 @@
-import * as fabric from 'fabric'
+
 import { AngleRect } from '@/types/elements'
 import { CanvasElement } from '@/types/canvas'
 

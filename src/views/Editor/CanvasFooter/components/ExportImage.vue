@@ -67,7 +67,6 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTemplatesStore } from '@/store'
-import { ImageFormat } from 'fabric'
 import useI18n from '@/hooks/useI18n'
 import useCanvasExport from '@/hooks/useCanvasExport'
 
