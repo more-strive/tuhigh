@@ -1,4 +1,4 @@
-import { Object as FabricObject } from 'fabric'
+
 import { customAlphabet } from 'nanoid'
 import { defineStore } from 'pinia'
 import { SYS_FONTS } from '@/configs/fonts'

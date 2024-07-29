@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import {  Point } from "fabric/fabric-impl"
 import { verticalLine, horizontalLine } from "@/types/elements"
 
 

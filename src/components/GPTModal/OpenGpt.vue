@@ -3,7 +3,7 @@
  * @Date: 2024-05-18 14:34:26
  * @LastEditors: June 1601745371@qq.com
  * @LastEditTime: 2024-05-18 15:28:58
- * @FilePath: \yft-design\src\components\GPTModal\OpenGpt.vue
+ * @FilePath: \tuhigh\src\components\GPTModal\OpenGpt.vue
  * @Description: 开通GPT弹窗
 -->
 <template>

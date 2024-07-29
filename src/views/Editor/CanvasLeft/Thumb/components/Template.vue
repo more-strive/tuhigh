@@ -14,7 +14,6 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, PropType, ref, watch } from 'vue'
-import { StaticCanvas, Group } from 'fabric'
 import { Template, CanvasElement } from '@/types/canvas'
 import { WorkSpaceThumbType, WorkSpaceDrawType } from '@/configs/canvas'
 

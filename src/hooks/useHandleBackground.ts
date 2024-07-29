@@ -2,7 +2,6 @@ import { useTemplatesStore } from "@/store"
 import { CanvasElement } from "@/types/canvas"
 import useCanvas from "@/logic/Canvas/useCanvas"
 import useCenter from "@/logic/Canvas/useCenter"
-import { Image } from "fabric"
 import { storeToRefs } from "pinia"
 import { ImageElement } from "@/types/canvas"
 

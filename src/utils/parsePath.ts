@@ -1,5 +1,4 @@
 import { PathPoint } from '@/types/common'
-import { util } from 'fabric'
 
 export const getPathPoints = (elementPath: util.TSimplePathData) => {
   let clipperPaths: any[] = []

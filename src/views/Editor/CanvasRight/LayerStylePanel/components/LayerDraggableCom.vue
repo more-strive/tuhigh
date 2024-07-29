@@ -51,7 +51,6 @@ import { CanvasElement, TextboxElement, ImageElement } from '@/types/canvas'
 import { ElementNames } from '@/types/elements'
 import { useMainStore, useTemplatesStore } from '@/store'
 import { storeToRefs } from 'pinia'
-import { Group, Object as FabricObject, Image } from 'fabric'
 import useHandleElement from "@/hooks/useHandleElement"
 
 const { 

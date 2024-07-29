@@ -1,4 +1,4 @@
-import type { Control } from 'fabric'
+
 import { PiBy180 } from '@/utils/common'
 
 interface NominalTag<T> {

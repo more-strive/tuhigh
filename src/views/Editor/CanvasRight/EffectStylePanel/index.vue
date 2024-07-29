@@ -138,7 +138,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Image, Rect, Textbox, IText, Object as FabricObject, Group } from "fabric";
 import { storeToRefs } from "pinia";
 import { ElMessage } from "element-plus";
 import { ref, watch, onMounted, computed } from "vue";

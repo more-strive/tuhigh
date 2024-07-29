@@ -17,7 +17,6 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store";
-import { Image } from "fabric";
 import { BlendModes } from '@/configs/images';
 import useCanvas from "@/logic/Canvas/useCanvas";
 

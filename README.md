@@ -1,9 +1,8 @@
-# yft-design
-1，一款美观且功能强大的在线设计工具，具备海报设计和图片编辑功能，基于Canvas的开源版【稿定设计】。适用于多种场景，如海报生成、电商产品图制作、文章长图设计、视频/公众号封面编辑等。  
+# tuhigh
+1，一款美观且功能强大的在线设计工具，具备海报设计和图片编辑功能，基于leafer.js的开源版【稿定设计】。适用于多种场景，如海报生成、电商产品图制作、文章长图设计、视频/公众号封面编辑等。  
 2，适配稿定设计导出pdf还原，支持导入psd还原  
 3，可导出图片，svg，pdf  
-<b>（国内）Demo：[https://yft.design](https://yft.design)</b>  
-<b>（国外）Demo：[https://dromara.org/yft-design](https://dromara.org/yft-design)</b>【无法体验psd,pdf,抠图服务】 
+<b>Demo：[https://tuhigh.cn](https://tuhigh.cn)</b>
 
 
 ![image](/docs/example.png)
@@ -58,15 +57,6 @@ npm run build
 │    └── Editor                   // 编辑器模块
 └── worker                        // web worker
 ```
-
-# 🧾 API接口文档
-### 使用fabric.js的编辑器文件解析器可以查看如下 [接口文档](/docs/api.md)
-  - 支持pdf
-  - 支持psd
-  - 支持ai(pdf结构)
-  - 抠图功能
-  - cdr解析测试中  
-### 如果有需要可以联系作者 yft.design@163.com
 
 # 📚 功能列表
 ### 基础功能
@@ -132,12 +122,6 @@ npm run build
 ## 联系作者
 wechat: 15972699417  
 email:  15972699417@163.com
-
-## 友情赞助商
-
-| Dooring低代码 |
-| --- |
-| <a href="https://dooring.vip/"> <img style="height: 90px" src="https://github.com/palxiao/poster-design/assets/21021314/2240801f-8484-4fd2-8505-8205daa6d53c" /></a> |
 
 ## License
 

@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 import pako from 'pako'
-const CRYPTO_KEY = 'yft-design'
+const CRYPTO_KEY = 'tuhigh'
 
 /**
  * 加密

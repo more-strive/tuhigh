@@ -1,4 +1,4 @@
-import { Path, Object as FabricObject } from 'fabric'
+
 import ClipperLib from 'clipper-lib'
 import Raphael from 'raphael'
 

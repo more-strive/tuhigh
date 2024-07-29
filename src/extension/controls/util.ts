@@ -1,5 +1,4 @@
-import  * as fabric from 'fabric';
-import type { Object as FabricObject, Point, Transform, TPointerEvent } from 'fabric';
+
 import { TOriginX, TOriginY } from '@/types/typedefs';
 import { resolveOrigin } from '@/utils/resolveOrigin';
 

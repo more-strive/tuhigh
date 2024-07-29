@@ -1,4 +1,4 @@
-import { util } from 'fabric';
+
 
 const degreesToRadians = util.degreesToRadians;
 

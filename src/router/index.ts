@@ -16,7 +16,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     name: "/",
     component: () => import("@/views/Editor/index.vue"),
     meta: { 
-      title: 'yft-design'
+      title: 'tuhigh'
     },
   },
   {

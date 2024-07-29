@@ -58,7 +58,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       // VitePWA({
       //   registerType: "autoUpdate",
       //   workbox: {
-      //     cacheId: "yft-design-cache",
+      //     cacheId: "tuhigh-cache",
       //     runtimeCaching: [
       //       {
       //         urlPattern: /.*/i,
@@ -84,8 +84,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       //     ],
       //   },
       //   manifest: {
-      //     name: "yft-design",
-      //     short_name: "yft-design",
+      //     name: "tuhigh",
+      //     short_name: "tuhigh",
       //     theme_color: "#d14424",
       //     icons: [
       //       {
@@ -126,7 +126,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         minify: true,
         inject: {
           data: {
-            title: 'yft-design'
+            title: 'tuhigh'
           }
         }
       })
@@ -196,7 +196,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           // assetFileNames: '[ext]/[name]-[hash].[ext]', // 资源文件像 字体，图片等
           manualChunks: {
             vue: ['vue'],
-            fabric: ['fabric'],
             'lodash-es': ['lodash-es'],
             'opentype.js': ['opentype.js'],
             'clipper-lib': ['clipper-lib'],

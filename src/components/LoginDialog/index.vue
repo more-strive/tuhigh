@@ -5,7 +5,7 @@
         微信扫码一键登录
       </el-row>
       <el-row class="text-[12px] mt-[10px] justify-center">
-        仅用于身份识别，yft-design不会获取您的任何隐私信息~
+        仅用于身份识别，tuhigh不会获取您的任何隐私信息~
       </el-row>
       <el-row>
         <div class="overflow-hidden relative mt-[20px] mx-auto p-[10px] border border-solid border-[rgba(0, 0, 0, .08)] rounded-[8px] justify-center">

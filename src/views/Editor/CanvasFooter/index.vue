@@ -8,7 +8,7 @@
         </el-tooltip>
       </div>
       <div class="left-handle">
-        <a href="https://github.com/dromara/yft-design" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/more-strive/tuhigh" target="_blank" rel="noopener noreferrer">
           <el-tooltip placement="top" :hide-after="0" :content="t('message.github')">
             <IconGithub class="footer-button"></IconGithub>
           </el-tooltip>

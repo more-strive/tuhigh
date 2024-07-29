@@ -96,7 +96,6 @@ import { ImageElement } from "@/types/canvas";
 import { ratioClipOptions } from "@/configs/images";
 import { getImageDataURL } from "@/utils/image";
 import { propertiesToInclude } from "@/configs/canvas";
-import { Image } from "fabric";
 import ElementPosition from "../Components/ElementPosition.vue";
 import ElementOutline from "../Components/ElementOutline.vue";
 import ElementShadow from "../Components/ElementShadow.vue";

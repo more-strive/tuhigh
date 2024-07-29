@@ -1,4 +1,4 @@
-import * as fabric from 'fabric';
+
 
 const getDistanceFromPointToLine = (point: fabric.Point, pointLineA: fabric.Point, pointLineB: fabric.Point) => {
   const a = pointLineA.y - pointLineB.y;

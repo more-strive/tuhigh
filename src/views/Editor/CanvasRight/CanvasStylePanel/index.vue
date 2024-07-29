@@ -178,7 +178,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Rect } from "fabric";
 import { storeToRefs } from "pinia";
 import { ElMessage } from "element-plus";
 import { ref, watch, onMounted, computed } from "vue";

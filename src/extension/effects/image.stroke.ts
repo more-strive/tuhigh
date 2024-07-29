@@ -5,7 +5,6 @@
  * @LastEditors: June
  * @LastEditTime: 2024-04-14 10:31:32
  */
-import { Image as FabricImage, StaticCanvas } from 'fabric'
 
 // 恢复未处理
 export const strokeImage = async (stroke: string, strokeWidth: number,  strokeLineJoin: CanvasLineJoin, fabricImage: FabricImage, type = 'source-over') => {

@@ -1,7 +1,6 @@
 import { useTemplatesStore } from "@/store"
 import { CanvasElement, GroupElement } from "@/types/canvas"
 import { ElementNames } from "@/types/elements"
-import { Image } from "fabric"
 import useCanvas from "./useCanvas"
 import pixiWorker from "@/worker/pixi?worker"
 
@@ -28,10 +27,10 @@ const findElement = (eid: string, elements: CanvasElement[] | undefined): Canvas
     if (item.id === eid) {
       return item
     }
-    if (item.type.toLowerCase() === ElementNames.GROUP) {
-      const element = findElement(eid, ((item as GroupElement)._objects) as CanvasElement[])
-      if (element) return element
-    }
+    // if (item.type.toLowerCase() === ElementNames.GROUP) {
+    //   const element = findElement(eid, ((item as GroupElement)._objects) as CanvasElement[])
+    //   if (element) return element
+    // }
   }
   return
 }
@@ -41,16 +40,16 @@ export const handleFilter = (worker: Worker) => {
   const [ canvas ] = useCanvas()
   worker.addEventListener('message', async (event) => {
     
-    const data = event.data
-    const objects = canvas.getObjects()
-    const element = findElement(data.id, objects as CanvasElement[]) as Image
-    if (element instanceof Image) {
-      element.originSrc = element.getSrc()
-      await element.setSrc(data.res)
-      element.dirty = true
-      canvas.renderAll()
-      templatesStore.modifedElement()
-    }
+    // const data = event.data
+    // const objects = canvas.getObjects()
+    // const element = findElement(data.id, objects as CanvasElement[]) as Image
+    // if (element instanceof Image) {
+    //   element.originSrc = element.getSrc()
+    //   await element.setSrc(data.res)
+    //   element.dirty = true
+    //   canvas.renderAll()
+    //   templatesStore.modifedElement()
+    // }
   });
 }
 

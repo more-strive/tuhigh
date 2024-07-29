@@ -1,4 +1,4 @@
-import * as fabric from 'fabric';
+
 import { normalizePoint } from '../../controls/util';
 
 export function fireCropImageEvent(target: fabric.Object) {

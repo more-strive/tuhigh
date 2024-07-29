@@ -1,5 +1,4 @@
-import * as fabric from 'fabric';
-import type { Object as FabricObject, Canvas, TPointerEvent, Transform, TransformActionHandler, TAxis } from 'fabric';
+
 
 // import { TAxis } from '@/types/typedefs';
 import { invertOrigin, isLocked, isTransformCentered } from './util';

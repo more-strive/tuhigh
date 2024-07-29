@@ -1,4 +1,4 @@
-// import { getFabricWindow } from 'fabric';
+
 import type { LoadImageOptions } from '../util/misc/objectEnlive';
 import { parseSVGDocument } from './parseSVGDocument';
 import type { SVGParsingOutput, TSvgReviverCallback } from './typedefs';

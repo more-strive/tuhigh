@@ -29,7 +29,6 @@ import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/store'
 import { ImageElement } from '@/types/canvas'
-import { filters, Image } from 'fabric'
 import useCanvas from '@/logic/Canvas/useCanvas'
 
 const BlendColorFilter = 'BlendColor'

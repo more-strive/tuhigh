@@ -124,8 +124,7 @@ import {
 } from "element-plus";
 import { uploadImage, uploadURL } from "@/api/matting";
 import { useTemplatesStore } from "@/store";
-import { MattingModel } from "@/configs/images";
-import { Image } from "fabric";
+import { MattingModel } from "@/configs/images"
 import useCanvasScale from "@/hooks/useCanvasScale";
 import useHandleCreate from "@/hooks/useHandleCreate";
 import useHandleTemplate from "@/hooks/useHandleTemplate";
@@ -271,7 +270,7 @@ const download = () => {
   if (!state.resultImage) return;
   downloadLinkFile(
     state.resultImage,
-    `yft-design-${Date.now()}-matting-${state.filename}`
+    `tuhigh-${Date.now()}-matting-${state.filename}`
   );
 };
 

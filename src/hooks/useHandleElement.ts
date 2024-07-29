@@ -1,4 +1,3 @@
-import { Object as FabricObject, Group, Path } from 'fabric'
 import { nanoid } from "nanoid"
 import { storeToRefs } from "pinia"
 import { KEYS } from '@/configs/hotkey'
@@ -8,7 +7,6 @@ import { useFabricStore, useMainStore, useTemplatesStore } from "@/store"
 import { TextboxElement, CanvasElement, GroupElement } from "@/types/canvas"
 import { clipperPath } from '@/utils/clipper'
 import { useActiveElement } from '@vueuse/core'
-import { computed } from 'vue'
 import useCanvas from "@/logic/Canvas/useCanvas"
 import useCanvasZindex from "./useCanvasZindex"
 import { copyText } from '@/utils/clipboard'

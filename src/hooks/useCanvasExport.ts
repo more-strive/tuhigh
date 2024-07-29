@@ -4,7 +4,6 @@ import { saveAs } from 'file-saver'
 import { storeToRefs } from 'pinia'
 import { useFabricStore, useTemplatesStore } from '@/store'
 import { WorkSpaceThumbType, WorkSpaceClipType, WorkSpaceCommonType, WorkSpaceSafeType, propertiesToInclude } from '@/configs/canvas'
-import { ImageFormat } from 'fabric'
 import { downloadSVGFile, downloadLinkFile } from '@/utils/download'
 import { changeDpiDataUrl } from 'changedpi'
 import useCanvas from '@/logic/Canvas/useCanvas'
@@ -73,7 +72,7 @@ export default () => {
     }
     const result = await exportFile(content)
     if (result && result.data.link) {
-      downloadLinkFile(result.data.link, `yft-design-${Date.now()}.${filetype}`)
+      downloadLinkFile(result.data.link, `tuhigh-${Date.now()}.${filetype}`)
     }
   }
 

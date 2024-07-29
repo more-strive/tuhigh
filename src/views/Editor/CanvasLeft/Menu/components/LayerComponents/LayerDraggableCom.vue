@@ -54,7 +54,6 @@ import { ElementNames } from '@/types/elements'
 import { useMainStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import useHandleElement from "@/hooks/useHandleElement"
-import { Group, Object as FabricObject } from 'fabric'
 
 const { 
   selectElement, 

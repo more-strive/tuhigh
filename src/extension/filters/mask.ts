@@ -1,4 +1,4 @@
-import { filters, TWebGLPipelineState, T2DPipelineState, util, classRegistry } from "fabric";
+
 
 export const isWebGLPipelineState = (
   options: TWebGLPipelineState | T2DPipelineState

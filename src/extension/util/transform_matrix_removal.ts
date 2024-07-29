@@ -1,4 +1,4 @@
-import { Object } from 'fabric/*';
+
 import { CENTER } from '../constants';
 import type { TMat2D } from '../typedefs'
 import { qrDecompose } from './misc/matrix';

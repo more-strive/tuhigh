@@ -4,7 +4,7 @@
   "private": true,
   "keywords": [
     "Vue3",
-    "fabric.js",
+    "leafer.js",
     "Typescript",
     "Element-plus"
   ],
@@ -34,7 +34,6 @@
     "delaunator": "^5.0.0",
     "dexie": "^3.2.4",
     "element-plus": "^2.6.1",
-    "fabric": "^6.0.0-beta12",
     "file-saver": "^2.0.5",
     "gifler": "^0.1.0",
     "hammerjs": "^2.0.8",

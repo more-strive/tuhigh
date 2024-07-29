@@ -2,8 +2,6 @@
 // import type { Gradient } from './gradient/Gradient';
 import type { Pattern } from '@/extension/pattern/Pattern';
 import type { Point } from './point/Point';
-// import type { XY, Point } from './Point';
-import type { Object as BaseFabricObject, Gradient } from 'fabric';
 
 interface NominalTag<T> {
   nominalTag?: T;

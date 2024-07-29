@@ -1,14 +1,4 @@
-import type { 
-  Control,
-  StaticCanvas,
-  Canvas,
-  IText,
-  Point,
-  Object as FabricObject,
-  Object as StaticFabricObject
-} from 'fabric';
-// import type { FabricObjectSVGExportMixin } from 'fabric';
-import type { Group } from 'fabric';
+
 import type { TOriginX, TOriginY, TRadian } from './typedefs';
 import type { saveObjectTransform } from '@/utils/objectTransforms';
 

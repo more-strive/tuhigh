@@ -1,5 +1,4 @@
 import { CanvasElement } from '@/types/canvas'
-import { Point } from 'fabric/fabric-impl'
 import { customAlphabet } from 'nanoid'
 import NP from 'number-precision'
 NP.enableBoundaryChecking(false); // default param is true
