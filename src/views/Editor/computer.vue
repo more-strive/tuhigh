@@ -15,6 +15,7 @@
         <CanvasCenter class="center-body" />
         <CanvasFooter class="center-footer h-[40px] relative leading-1.5 flex justify-between" />
         <CanvasAffix  class="center-affix"/>
+        <CanvasICP  class="center-icp"/>
       </div>
       <CanvasRight class="layout-content-right h-full w-[260px] bg-[#fff] flex flex-col" />
       <CanvasDom class="absolute -z-[200] -left-[300px]" />
@@ -30,6 +31,7 @@ import CanvasCenter from "./CanvasCenter/index.vue";
 import CanvasRight from "./CanvasRight/index.vue";
 import CanvasFooter from "./CanvasFooter/index.vue";
 import CanvasAffix from "./CanvasAffix/index.vue";
+import CanvasICP from "./CanvasICP/index.vue";
 import CanvasDom from "./CanvasDom/index.vue";
 import CanvasTour from "./CanvasTour/index.vue";
 </script>
